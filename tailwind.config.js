@@ -10,6 +10,7 @@ export default {
         'soft-orange': '#ED553B',
         'light-gray': '#E3E6EB',
         'light-gray-2': '#F8FAFD',
+        'light-gray-3': '#5A5A5A',
         'light-blue': '#00A1E8',
       },
     },

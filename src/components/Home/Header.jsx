@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import SelectOption from '../Form/SelectOption'
+import { useState } from 'react'
+import Modal from '../General/Dialog'
 
 const filters = [
   { name: 'Judul' },
@@ -11,8 +13,13 @@ const filters = [
 ]
 
 function Header() {
+  let [isOpen, setIsOpen] = useState(true)
+
+  function openModal() {
+    setIsOpen(true)
+  }
   return (
-    <div className='w-full h-[calc(100vh-44px)] flex flex-col items-center justify-center bg-cover object-center'>
+    <div className='w-full h-[calc(100vh-44px)] flex flex-col items-center justify-center bg-cover object-center relative z-10'>
       <img
         src='/logo1.svg'
         alt='logo'
@@ -21,7 +28,11 @@ function Header() {
         Online Public Access Catalog
       </div>
       <div className='flex lg:max-w-[912px] bg-search-home py-2 px-4 gap-2 relative z-10'>
-        <SelectOption filters={filters} />
+        <SelectOption
+          filters={filters}
+          width={'min-w-[120px]'}
+          color={'text-white'}
+        />
         <div className='flex gap-1 w-[350px] items-center'>
           <label htmlFor='search-input'>
             <img
@@ -50,12 +61,13 @@ function Header() {
             Cari berdasarkan judul, subjek, tahun, pengarang, dll
           </p>
           <div className='w-[1px] h-[20px] bg-dark-blue opacity-80'></div>
-          <Link
-            to={'/#'}
+          <button
+            type='button'
+            onClick={openModal}
             className='text-dark-blue text-[14px] underline font-bold'
           >
             Advanced Search
-          </Link>
+          </button>
         </div>
 
         <div className='px-4 py-2 bg-search-home mt-20'>
@@ -67,6 +79,12 @@ function Header() {
           </Link>
         </div>
       </div>
+
+      {/* Modal */}
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </div>
   )
 }

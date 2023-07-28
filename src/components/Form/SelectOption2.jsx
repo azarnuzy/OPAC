@@ -2,7 +2,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { checkPropTypes } from 'prop-types'
 import { Fragment, useState } from 'react'
 
-function SelectOption({ filters, width, color }) {
+function SelectOption2({ filters, width = 'min-w-[300px]' }) {
   const [selected, setSelected] = useState(filters[0])
   return (
     <Listbox
@@ -11,14 +11,14 @@ function SelectOption({ filters, width, color }) {
     >
       <div className={`relative ${width}`}>
         <Listbox.Button
-          className={`relative w-full cursor-default rounded-lg bg-transparent ${color} opacity-70 pl-3 pr-10 text-left  sm:text-sm`}
+          className={`relative w-full cursor-default rounded-lg bg-slate-200 text-light-gray-3 opacity-70 pl-3 pr-10 text-left  sm:text-sm py-2`}
         >
           <span className='block truncate '>{selected.name}</span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
             <img
-              src='/chevron-up-down.svg'
+              src='/chevron-up-down2.svg'
               alt='chevron_up_down'
-              className={`h-5 w-5 ${color}`}
+              className={`h-5 w-5 text-light-gray-3`}
               aria-hidden='true'
             />
           </span>
@@ -29,7 +29,7 @@ function SelectOption({ filters, width, color }) {
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white text-base shadow-lg ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+          <Listbox.Options className='absolute mt-1 max-h-40 w-full overflow-auto rounded-md bg-white text-base shadow-lg ring-black ring-opacity-5 focus:outline-none sm:text-sm z-30'>
             {filters.map((person, personIdx) => (
               <Listbox.Option
                 key={personIdx}
@@ -60,10 +60,10 @@ function SelectOption({ filters, width, color }) {
   )
 }
 
-SelectOption.propTypes = {
+SelectOption2.propTypes = {
   filters: checkPropTypes.array,
   width: checkPropTypes.string,
   color: checkPropTypes.string,
 }
 
-export default SelectOption
+export default SelectOption2

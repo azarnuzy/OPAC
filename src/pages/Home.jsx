@@ -1,3 +1,4 @@
+import Footer from '../components/General/Footer'
 import Topbar from '../components/General/Topbar'
 import Header from '../components/Home/Header'
 
@@ -6,6 +7,7 @@ function Home() {
     <div className='h-screen'>
       <Topbar />
       <Header />
+      <Footer />
     </div>
   )
 }
