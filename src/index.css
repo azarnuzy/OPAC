@@ -10,3 +10,28 @@
     ),
     #35373d;
 }
+
+.bg-cover {
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
+    url('/assets/cover1.webp'), lightgray 50% / cover no-repeat;
+}
+
+.bg-search-home {
+  border-radius: 17.712px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+}
+
+.custom-dropdown option {
+  background-color: white;
+}
+
+.custom-dropdown option:checked,
+.custom-dropdown option:hover {
+  background-color: #f1ad28;
+}

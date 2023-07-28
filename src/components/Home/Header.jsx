@@ -1,0 +1,74 @@
+import { Link } from 'react-router-dom'
+import SelectOption from '../Form/SelectOption'
+
+const filters = [
+  { name: 'Judul' },
+  { name: 'Subjek' },
+  { name: 'Klasifikasi DDC' },
+  { name: 'Material' },
+  { name: 'Tahun' },
+  { name: 'Pengarang' },
+]
+
+function Header() {
+  return (
+    <div className='w-full h-[calc(100vh-44px)] flex flex-col items-center justify-center bg-cover object-center'>
+      <img
+        src='/logo1.svg'
+        alt='logo'
+      />
+      <div className='mb-10 text-5xl font-bold text-white'>
+        Online Public Access Catalog
+      </div>
+      <div className='flex lg:max-w-[912px] bg-search-home py-2 px-4 gap-2 relative z-10'>
+        <SelectOption filters={filters} />
+        <div className='flex gap-1 w-[350px] items-center'>
+          <label htmlFor='search-input'>
+            <img
+              src='/search.svg'
+              alt='search'
+              width={16}
+              className='opacity-70'
+            />
+          </label>
+          <input
+            id='search-input'
+            placeholder='Ketik disini'
+            className='w-full text-white bg-transparent text-sm focus:outline-none placeholder-white opacity-70'
+          />
+        </div>
+        <button
+          className='bg-white rounded-2xl px-4 text-dark-blue text-sm font-semibold'
+          type='submit'
+        >
+          Search
+        </button>
+      </div>
+      <div className='relative w-[650px] flex justify-center'>
+        <div className='flex justify-center items-center absolute bg-white z-0 rounded-b-2xl text-dark-blue w-[calc(100%-120px)] gap-2 pb-1 pt-2 -top-1'>
+          <p className='font-bold text-dark-blue text-[12px]'>
+            Cari berdasarkan judul, subjek, tahun, pengarang, dll
+          </p>
+          <div className='w-[1px] h-[20px] bg-dark-blue opacity-80'></div>
+          <Link
+            to={'/#'}
+            className='text-dark-blue text-[14px] underline font-bold'
+          >
+            Advanced Search
+          </Link>
+        </div>
+
+        <div className='px-4 py-2 bg-search-home mt-20'>
+          <Link
+            to={'/#'}
+            className='text-white text-[14px] underline font-bold'
+          >
+            Usulkan Buku Baru
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Header

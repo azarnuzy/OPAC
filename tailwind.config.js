@@ -5,12 +5,16 @@ export default {
     extend: {
       colors: {
         'dark-gray': '#35373D',
+        'dark-blue': '#1B4E7A',
         'soft-yellow': '#F1AD28',
         'soft-orange': '#ED553B',
         'light-gray': '#E3E6EB',
         'light-gray-2': '#F8FAFD',
         'light-blue': '#00A1E8',
       },
+    },
+    fontFamily: {
+      sans: ['Helvetica', 'Poppins', 'sans-serif'],
     },
   },
   plugins: [],
