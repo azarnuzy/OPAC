@@ -1,5 +1,11 @@
+import Topbar from '../components/General/Topbar'
+
 function Home() {
-  return <div className='w-full text-red-500'>home</div>
+  return (
+    <>
+      <Topbar />
+    </>
+  )
 }
 
 export default Home
