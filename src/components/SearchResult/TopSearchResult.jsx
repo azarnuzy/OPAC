@@ -19,11 +19,11 @@ function TopSearchResult() {
             Pencarian
           </Link>
           <div className='rotate-[10deg] w-[1px] bg-light-gray h-[20px]'></div>
-          <div className='order-3 sm:order-2 text-light-gray-3 cursor-pointer  hover:underline'>
+          <div className=' text-light-gray-3 cursor-pointer  hover:underline'>
             Hasil Pencarian
           </div>
         </div>
-        <div className='order-2 sm:order-3 flex flex-col sm:flex-row justify-center w-full sm:w-fit gap-2 items-center px-4 sm:px-0'>
+        <div className='order-3 lg:order-2 flex flex-col sm:flex-row justify-center w-full sm:w-fit md:w-full md:mx-auto lg:w-fit gap-2 items-center px-4 sm:px-0'>
           <p className='text-light-gray-3 font-semibold'>
             Menampilkan Pencarian
           </p>
@@ -37,10 +37,12 @@ function TopSearchResult() {
             1 - 10 dari 1680 data
           </p>
         </div>
-        <SelectOption3
-          filters={filters}
-          width='w-fit'
-        />
+        <div className='order-2 lg:order-3'>
+          <SelectOption3
+            filters={filters}
+            width='w-fit'
+          />
+        </div>
       </div>
     </div>
   )
