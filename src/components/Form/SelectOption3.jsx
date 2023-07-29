@@ -11,7 +11,7 @@ function SelectOption3({ filters, width = 'min-w-[300px]' }) {
     >
       <div className={`relative ${width}`}>
         <Listbox.Button
-          className={`flex py-1 px-3 bg-light-gray gap-2 rounded-full items-center`}
+          className={`flex py-1 px-3 bg-light-gray-2 gap-2 rounded-full items-center`}
         >
           <img
             src='/filter.svg'
