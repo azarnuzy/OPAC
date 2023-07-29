@@ -15,7 +15,7 @@ function Footer() {
           alt='ornament'
         />
       </div>
-      <div className='w-full mx-auto max-w-7xl flex items-center justify-between text-white relative py-4'>
+      <div className='w-full mx-auto max-w-7xl flex flex-col gap-8 sm:gap-0 sm:flex-row items-start sm:items-center justify-between text-white relative px-3 py-4'>
         <div className='flex flex-col gap-8 max-w-[360px]'>
           <img
             src='/logo1.svg'

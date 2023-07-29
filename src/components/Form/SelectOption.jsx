@@ -11,7 +11,7 @@ function SelectOption({ filters, width, color }) {
     >
       <div className={`relative ${width}`}>
         <Listbox.Button
-          className={`relative w-full cursor-default rounded-lg bg-transparent ${color} opacity-70 pl-3 pr-10 text-left  sm:text-sm`}
+          className={`relative w-full cursor-default rounded-lg bg-transparent ${color} opacity-70 pl-3 py-1 pr-10 text-left  sm:text-sm`}
         >
           <span className='block truncate '>{selected.name}</span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
@@ -29,7 +29,7 @@ function SelectOption({ filters, width, color }) {
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white text-base shadow-lg ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+          <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white text-base shadow-lg ring-black ring-opacity-5 focus:outline-none sm:text-sm z-20'>
             {filters.map((person, personIdx) => (
               <Listbox.Option
                 key={personIdx}
