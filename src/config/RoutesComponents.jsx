@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
 import Home from '../pages/Home'
+import SearchResult from '../pages/SearchResult'
 
 export default function RoutesComponents() {
   return (
@@ -12,6 +13,10 @@ export default function RoutesComponents() {
         <Route
           path='/'
           element={<Home />}
+        />
+        <Route
+          path='/search'
+          element={<SearchResult />}
         />
       </Route>
     </Routes>

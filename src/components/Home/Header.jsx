@@ -58,7 +58,7 @@ function Header() {
       </div>
       <div className='relative w-full sm:w-[650px] flex justify-center'>
         <div className='flex justify-center items-center absolute bg-white z-0 rounded-b-2xl text-dark-blue w-[calc(100%-60px)] sm:w-[calc(100%-120px)] gap-2 pb-1 pt-2 -top-1'>
-          <p className='font-bold text-dark-blue text-[12px] text-center'>
+          <p className='font-bold text-dark-blue text-[12px] sm:text-[14px] text-center'>
             Cari berdasarkan judul, subjek, tahun, pengarang, dll
           </p>
           <div className='w-[1px] h-[20px] bg-dark-blue opacity-80'></div>
