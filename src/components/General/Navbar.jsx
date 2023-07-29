@@ -18,7 +18,7 @@ function Navbar() {
     setIsOpen(true)
   }
   return (
-    <div className='flex justify-between max-w-7xl lg:px-3 sm:px-5 py-2'>
+    <div className='flex justify-between w-full mx-auto max-w-7xl lg:px-3 sm:px-5 py-2'>
       <img
         src='/logo2.svg'
         alt='logo'
