@@ -21,7 +21,7 @@ function Content() {
               key={item + i}
               className='bg-white rounded-lg shadow-lg'
             >
-              <div className='p-3 flex gap-5'>
+              <div className='p-3 flex flex-col sm:flex-row items-center gap-5'>
                 <img
                   src='/assets/book.png'
                   alt='book-cover'
