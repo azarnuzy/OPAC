@@ -126,7 +126,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                     Advanced Search
                   </Dialog.Title>
                   <div className='w-full h-[1px] bg-gray-300 my-3'></div>
-                  <div className='grid grid-cols-2 gap-3 justify-between w-full'>
+                  <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between w-full'>
                     <div className='flex flex-col gap-2'>
                       <label
                         htmlFor='judul'
@@ -175,11 +175,11 @@ export default function Modal({ isOpen, setIsOpen }) {
                       <input
                         id='search-input'
                         placeholder='Ketik disini'
-                        className='w-[370px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+                        className=' sm:w-[370px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
                       />
                       <SelectOption2
                         filters={filters}
-                        width='w-[calc(100%-420px)]'
+                        width='sm:w-[calc(100%-420px)]'
                       />
                       <img
                         src='/plus.svg'
