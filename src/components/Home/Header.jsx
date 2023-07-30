@@ -28,7 +28,7 @@ function Header() {
       <div className='mb-10 text-3xl sm:text-5xl text-center font-bold text-white'>
         Online Public Access Catalog
       </div>
-      <div className='flex flex-col sm:flex-row md:max-w-[912px] bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'>
+      <div className='flex flex-col sm:flex-row md:max-w-[912px] md:w-fit bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'>
         <SelectOption
           filters={filters}
           width={'min-w-[120px]'}
