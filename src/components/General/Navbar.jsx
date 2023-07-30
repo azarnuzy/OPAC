@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SelectOption2 from '../Form/SelectOption2'
 import Modal from './Dialog'
+import { Link } from 'react-router-dom'
 
 const filters = [
   { name: 'Judul' },
@@ -19,11 +20,13 @@ function Navbar() {
   }
   return (
     <div className='flex flex-col lg:flex-row items-center sm:justify-between w-full mx-auto max-w-7xl lg:px-3 sm:px-5 py-2'>
-      <img
-        src='/logo2.svg'
-        alt='logo'
-        className='w-[200px] sm:w-[300px]'
-      />
+      <Link to={'/'}>
+        <img
+          src='/logo2.svg'
+          alt='logo'
+          className='w-[200px] sm:w-[300px]'
+        />
+      </Link>
       <div className='flex flex-wrap lg:flex-nowrap justify-center lg:justify-normal gap-2 items-center'>
         <SelectOption2
           filters={filters}

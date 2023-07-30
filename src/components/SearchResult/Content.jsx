@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const data = {
   pengarang: 'Pengarang',
   material: 'Material',
@@ -17,7 +19,8 @@ function Content() {
       <div className='lg:max-w-7xl px-3 mx-auto '>
         <div className='grid grid-cols-1 gap-4 py-5'>
           {data2.map((item, i) => (
-            <div
+            <Link
+              to={'/detail'}
               key={item + i}
               className='bg-white rounded-lg shadow-lg'
             >
@@ -38,8 +41,6 @@ function Content() {
                     </p>
                   </div>
                   <div className='grid gap-2 grid-cols-1 md:grid-cols-2'>
-                    {/* title of book  */}
-
                     {Object.entries(data).map(([key, value]) => (
                       <div
                         className='flex gap-2 items-center'
@@ -52,7 +53,7 @@ function Content() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

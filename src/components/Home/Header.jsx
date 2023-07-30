@@ -28,13 +28,13 @@ function Header() {
       <div className='mb-10 text-3xl sm:text-5xl text-center font-bold text-white'>
         Online Public Access Catalog
       </div>
-      <div className='flex flex-col sm:flex-row md:max-w-[912px] bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3'>
+      <div className='flex flex-col sm:flex-row md:max-w-[912px] bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'>
         <SelectOption
           filters={filters}
           width={'min-w-[120px]'}
           color={'text-white'}
         />
-        <div className='flex gap-1 w-[350px] items-center'>
+        <div className='flex gap-1 w-full pl-2 md:w-[350px] items-center'>
           <label htmlFor='search-input'>
             <img
               src='/search.svg'
@@ -49,12 +49,13 @@ function Header() {
             className='w-full text-white bg-transparent text-sm focus:outline-none placeholder-white opacity-90 py-1'
           />
         </div>
-        <button
-          className='bg-white rounded-2xl px-4 text-dark-blue text-sm font-semibold sm:w-min w-[150px] py-1 mx-auto'
+        <Link
+          to={'/search'}
+          className='bg-white rounded-2xl px-4 text-dark-blue text-sm font-semibold sm:w-min w-[150px] py-1 mx-auto text-center'
           type='submit'
         >
           Search
-        </button>
+        </Link>
       </div>
       <div className='relative w-full sm:w-[650px] flex justify-center'>
         <div className='flex justify-center items-center absolute bg-white z-0 rounded-b-2xl text-dark-blue w-[calc(100%-60px)] sm:w-[calc(100%-120px)] gap-2 pb-1 pt-2 -top-1'>
