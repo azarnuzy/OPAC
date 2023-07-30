@@ -22,7 +22,7 @@ function Content() {
             <Link
               to={'/detail'}
               key={item + i}
-              className='bg-white rounded-lg shadow-lg'
+              className='bg-white rounded-lg shadow-lg border border-solid border-light-gray'
             >
               <div className='p-3 flex flex-col sm:flex-row items-center gap-5'>
                 <img
