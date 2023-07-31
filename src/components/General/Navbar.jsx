@@ -1,7 +1,15 @@
 import { useState } from 'react'
 import SelectOption2 from '../Form/SelectOption2'
 import Modal from './Dialog'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAlert } from '../context/alert-context'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getSearch,
+  getSubject,
+  setSearch,
+} from '../../features/search/searchSlice'
+import Alert from './Alert'
 
 const filters = [
   { name: 'Judul' },
@@ -14,12 +22,26 @@ const filters = [
 
 function Navbar() {
   let [isOpen, setIsOpen] = useState(false)
+  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState('')
+
+  const { handleNotification } = useAlert()
+
+  const search = useSelector(getSearch)
+  const subject = useSelector(getSubject)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   function openModal() {
     setIsOpen(true)
   }
   return (
     <div className='flex flex-col lg:flex-row items-center sm:justify-between w-full mx-auto max-w-7xl lg:px-3 sm:px-5 py-2'>
+      <Alert
+        message={message}
+        status={status}
+      />
       <Link to={'/'}>
         <img
           src='/logo2.svg'
@@ -36,8 +58,22 @@ function Navbar() {
           type='text'
           placeholder='Ketik disini'
           className='w-[300px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+          value={search}
+          onChange={(e) => dispatch(setSearch(e.target.value))}
         />
-        <div className='flex items-center pl-2 pr-4 lg:p-0 gap-2 bg-light-gray rounded-full'>
+        <button
+          className='flex items-center pl-2 pr-4 lg:p-0 gap-2 bg-light-gray rounded-full'
+          type='submit'
+          onClick={() => {
+            if (search !== '') {
+              navigate(`/search?search=${search}&subject=${subject}`)
+            } else {
+              setMessage('Kolom pencarian tidak boleh kosong')
+              setStatus('Peringatan')
+              handleNotification()
+            }
+          }}
+        >
           <img
             src='/search2.svg'
             alt='search'
@@ -45,7 +81,7 @@ function Navbar() {
             className='p-2'
           />
           <p className='lg:hidden text-light-gray-3 font-semibold'>Search</p>
-        </div>
+        </button>
         <div className=' w-[1px] bg-gray-400 h-[40px] sm:flex items-center mx-2'></div>
         <button
           type='button'

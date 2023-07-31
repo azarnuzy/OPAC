@@ -10,6 +10,7 @@ function AlertProvider({ children }) {
 
   const handleNotification = () => {
     setOpen(false)
+
     window.clearTimeout(timerRef.current)
     timerRef.current = window.setTimeout(() => {
       // eventDateRef.current = oneWeekAway()

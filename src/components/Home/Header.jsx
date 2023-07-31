@@ -1,12 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom'
 import SelectOption from '../Form/SelectOption'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from '../General/Dialog'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getSearch,
   getSubject,
   setSearch,
+  setSubject,
 } from '../../features/search/searchSlice'
 import Alert from '../General/Alert'
 import { useAlert } from '../context/alert-context'
@@ -30,6 +31,11 @@ function Header() {
   const dispatch = useDispatch()
   const search = useSelector(getSearch)
   const subject = useSelector(getSubject)
+
+  useEffect(() => {
+    dispatch(setSubject('Judul'))
+    dispatch(setSearch(''))
+  }, [dispatch])
 
   const navigate = useNavigate()
 
@@ -68,6 +74,7 @@ function Header() {
           </label>
           <input
             id='search-input'
+            value={search}
             placeholder='Ketik disini'
             className='w-full text-white bg-transparent text-sm focus:outline-none placeholder-white opacity-90 py-1'
             onChange={(e) => dispatch(setSearch(e.target.value))}

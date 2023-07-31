@@ -19,11 +19,11 @@ const Alert = ({ message, status }) => {
           setOpen(false)
         }}
       >
-        <Toast.Title className='[grid-area:_title] mb-[5px] font-semibold text-slate-600  '>
+        <Toast.Title className='[grid-area:_title] mb-[5px] font-semibold text-yellow-600  '>
           {status}
         </Toast.Title>
         <Toast.Description asChild>
-          <div className='[grid-area:_description] m-0 text-gray-900 text-[13px] leading-[1.3] '>
+          <div className='[grid-area:_description] m-0 text-gray-500 text-[13px] leading-[1.3] font-semibold'>
             {message}
           </div>
         </Toast.Description>
