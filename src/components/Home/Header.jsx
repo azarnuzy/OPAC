@@ -1,7 +1,15 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SelectOption from '../Form/SelectOption'
 import { useState } from 'react'
 import Modal from '../General/Dialog'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getSearch,
+  getSubject,
+  setSearch,
+} from '../../features/search/searchSlice'
+import Alert from '../General/Alert'
+import { useAlert } from '../context/alert-context'
 
 const filters = [
   { name: 'Judul' },
@@ -14,12 +22,27 @@ const filters = [
 
 function Header() {
   let [isOpen, setIsOpen] = useState(false)
+  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState('')
+
+  const { handleNotification } = useAlert()
+
+  const dispatch = useDispatch()
+  const search = useSelector(getSearch)
+  const subject = useSelector(getSubject)
+
+  const navigate = useNavigate()
 
   function openModal() {
     setIsOpen(true)
   }
+
   return (
     <div className='w-full h-[calc(100vh-44px)] flex flex-col items-center pt-16 sm:pt-0 sm:justify-center bg-cover object-center relative z-10'>
+      <Alert
+        message={message}
+        status={status}
+      />
       <img
         src='/logo1.svg'
         alt='logo'
@@ -47,15 +70,24 @@ function Header() {
             id='search-input'
             placeholder='Ketik disini'
             className='w-full text-white bg-transparent text-sm focus:outline-none placeholder-white opacity-90 py-1'
+            onChange={(e) => dispatch(setSearch(e.target.value))}
           />
         </div>
-        <Link
-          to={'/search'}
+        <button
+          onClick={() => {
+            if (search !== '') {
+              navigate(`/search?search=${search}&subject=${subject}`)
+            } else {
+              setMessage('Kolom pencarian tidak boleh kosong')
+              setStatus('Peringatan')
+              handleNotification()
+            }
+          }}
           className='bg-white rounded-2xl px-4 text-dark-blue text-sm font-semibold sm:w-min w-[150px] py-1 mx-auto text-center'
           type='submit'
         >
           Search
-        </Link>
+        </button>
       </div>
       <div className='relative w-full sm:w-[650px] flex justify-center'>
         <div className='flex justify-center items-center absolute bg-white z-0 rounded-b-2xl text-dark-blue w-[calc(100%-60px)] sm:w-[calc(100%-120px)] gap-2 pb-1 pt-2 -top-1'>

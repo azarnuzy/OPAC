@@ -2,6 +2,7 @@ import Footer from '../components/General/Footer'
 import Topbar from '../components/General/Topbar'
 import Header from '../components/Home/Header'
 import MetaTags from '../components/SEO/MetaTags'
+import AlertProvider from '../components/context/alert-context'
 
 function Home() {
   return (
@@ -13,7 +14,9 @@ function Home() {
         ogImage='/assets/home.png'
       />
       <Topbar />
-      <Header />
+      <AlertProvider>
+        <Header />
+      </AlertProvider>
       <Footer />
     </div>
   )

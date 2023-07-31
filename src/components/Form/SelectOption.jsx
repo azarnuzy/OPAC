@@ -1,13 +1,20 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { checkPropTypes } from 'prop-types'
 import { Fragment, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setSubject } from '../../features/search/searchSlice'
 
 function SelectOption({ filters, width, color }) {
   const [selected, setSelected] = useState(filters[0])
+  const dispatch = useDispatch()
+
   return (
     <Listbox
       value={selected}
-      onChange={setSelected}
+      onChange={(select) => {
+        setSelected(select)
+        dispatch(setSubject(select.name))
+      }}
     >
       <div className={`relative ${width}`}>
         <Listbox.Button
