@@ -8,6 +8,8 @@ const initialState = {
   keyword: '',
   data: [],
   isFirstFetch: false,
+  collections: [],
+  materials: [],
 }
 
 export const fetchSearch = createAsyncThunk(
@@ -17,6 +19,30 @@ export const fetchSearch = createAsyncThunk(
       const response = await axios.get(
         `${apiConfig.baseUrl}/v1/biblios/basic-search?sort=title&type=asc&search=${search}&key=${keyword}`
       )
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+)
+
+export const fetchCollections = createAsyncThunk(
+  'search/fetchCollections',
+  async () => {
+    try {
+      const response = await axios.get(`${apiConfig.baseUrl}/v1/collections`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+)
+
+export const fetchMaterials = createAsyncThunk(
+  'search/fetchMaterials',
+  async () => {
+    try {
+      const response = await axios.get(`${apiConfig.baseUrl}/v1/materials`)
       return response.data
     } catch (error) {
       console.error(error)
@@ -72,7 +98,13 @@ const searchSlice = createSlice({
     builder.addCase(fetchSearch.fulfilled, (state, action) => {
       state.isFirstFetch = true
       state.data = action.payload
-    })
+    }),
+      builder.addCase(fetchCollections.fulfilled, (state, action) => {
+        state.collections = action.payload
+      }),
+      builder.addCase(fetchMaterials.fulfilled, (state, action) => {
+        state.materials = action.payload
+      })
   },
 })
 

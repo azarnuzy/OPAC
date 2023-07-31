@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchSearch,
   getKeyword,
-  getSearch,
+  // getSearch,
   getSearchFilter,
   setKeyword,
   setSearch,
@@ -32,7 +32,7 @@ function Header() {
 
   const dispatch = useDispatch()
   const keyword = useSelector(getKeyword)
-  const search = useSelector(getSearch)
+  // const search = useSelector(getSearch)
   const searchFilter = useSelector(getSearchFilter)
 
   useEffect(() => {
@@ -85,8 +85,8 @@ function Header() {
         </div>
         <button
           onClick={() => {
-            if (search !== '') {
-              // navigate(`/search?search=${search}&keyword=${keyword}`)
+            if (keyword !== '') {
+              navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
               dispatch(fetchSearch({ keyword, search: searchFilter }))
             } else {
               setMessage('Kolom pencarian tidak boleh kosong')
