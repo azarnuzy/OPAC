@@ -1,8 +1,8 @@
 import { Listbox, Transition } from '@headlessui/react'
-import { checkPropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 import { Fragment, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setSubject } from '../../features/search/searchSlice'
+import { setSearch } from '../../features/search/searchSlice'
 
 function SelectOption({ filters, width, color }) {
   const [selected, setSelected] = useState(filters[0])
@@ -13,7 +13,7 @@ function SelectOption({ filters, width, color }) {
       value={selected}
       onChange={(select) => {
         setSelected(select)
-        dispatch(setSubject(select.name))
+        dispatch(setSearch(select.name))
       }}
     >
       <div className={`relative ${width}`}>
@@ -68,9 +68,9 @@ function SelectOption({ filters, width, color }) {
 }
 
 SelectOption.propTypes = {
-  filters: checkPropTypes.array,
-  width: checkPropTypes.string,
-  color: checkPropTypes.string,
+  filters: PropTypes.array,
+  width: PropTypes.string,
+  color: PropTypes.string,
 }
 
 export default SelectOption

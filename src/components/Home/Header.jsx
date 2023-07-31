@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 import Modal from '../General/Dialog'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  fetchSearch,
+  getKeyword,
   getSearch,
-  getSubject,
+  getSearchFilter,
+  setKeyword,
   setSearch,
-  setSubject,
 } from '../../features/search/searchSlice'
 import Alert from '../General/Alert'
 import { useAlert } from '../context/alert-context'
@@ -29,12 +31,13 @@ function Header() {
   const { handleNotification } = useAlert()
 
   const dispatch = useDispatch()
+  const keyword = useSelector(getKeyword)
   const search = useSelector(getSearch)
-  const subject = useSelector(getSubject)
+  const searchFilter = useSelector(getSearchFilter)
 
   useEffect(() => {
-    dispatch(setSubject('Judul'))
-    dispatch(setSearch(''))
+    dispatch(setSearch('Judul'))
+    dispatch(setKeyword(''))
   }, [dispatch])
 
   const navigate = useNavigate()
@@ -74,16 +77,17 @@ function Header() {
           </label>
           <input
             id='search-input'
-            value={search}
+            value={keyword}
             placeholder='Ketik disini'
             className='w-full text-white bg-transparent text-sm focus:outline-none placeholder-white opacity-90 py-1'
-            onChange={(e) => dispatch(setSearch(e.target.value))}
+            onChange={(e) => dispatch(setKeyword(e.target.value))}
           />
         </div>
         <button
           onClick={() => {
             if (search !== '') {
-              navigate(`/search?search=${search}&subject=${subject}`)
+              // navigate(`/search?search=${search}&keyword=${keyword}`)
+              dispatch(fetchSearch({ keyword, search: searchFilter }))
             } else {
               setMessage('Kolom pencarian tidak boleh kosong')
               setStatus('Peringatan')

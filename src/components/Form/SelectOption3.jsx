@@ -1,5 +1,5 @@
 import { Listbox, Transition } from '@headlessui/react'
-import { checkPropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 import { Fragment, useState } from 'react'
 
 function SelectOption3({ filters, width = 'min-w-[300px]' }) {
@@ -60,8 +60,8 @@ function SelectOption3({ filters, width = 'min-w-[300px]' }) {
 }
 
 SelectOption3.propTypes = {
-  filters: checkPropTypes.array,
-  width: checkPropTypes.string,
+  filters: PropTypes.array,
+  width: PropTypes.string,
 }
 
 export default SelectOption3

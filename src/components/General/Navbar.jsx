@@ -5,10 +5,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAlert } from '../context/alert-context'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  getKeyword,
   getSearch,
-  getSubject,
+  setKeyword,
   setSearch,
-  setSubject,
 } from '../../features/search/searchSlice'
 import Alert from './Alert'
 
@@ -28,15 +28,15 @@ function Navbar() {
 
   const { handleNotification } = useAlert()
 
-  const search = useSelector(getSearch)
-  const subject = useSelector(getSubject)
+  const keyword = useSelector(getKeyword)
+  const subject = useSelector(getSearch)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setSubject('Judul'))
-    dispatch(setSearch(''))
+    dispatch(setSearch('Judul'))
+    dispatch(setKeyword(''))
   }, [dispatch])
 
   function openModal() {
@@ -64,15 +64,15 @@ function Navbar() {
           type='text'
           placeholder='Ketik disini'
           className='w-[300px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
-          value={search}
-          onChange={(e) => dispatch(setSearch(e.target.value))}
+          value={keyword}
+          onChange={(e) => dispatch(setKeyword(e.target.value))}
         />
         <button
           className='flex items-center pl-2 pr-4 lg:p-0 gap-2 bg-light-gray rounded-full'
           type='submit'
           onClick={() => {
-            if (search !== '') {
-              navigate(`/search?search=${search}&subject=${subject}`)
+            if (keyword !== '') {
+              navigate(`/search?search=${keyword}&subject=${subject}`)
             } else {
               setMessage('Kolom pencarian tidak boleh kosong')
               setStatus('Peringatan')

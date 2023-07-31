@@ -1,6 +1,6 @@
 import * as Toast from '@radix-ui/react-toast'
 import { useEffect } from 'react'
-import { checkPropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 import { useAlert } from '../context/alert-context'
 
 const Alert = ({ message, status }) => {
@@ -45,6 +45,6 @@ const Alert = ({ message, status }) => {
 export default Alert
 
 Alert.propTypes = {
-  message: checkPropTypes.string,
-  status: checkPropTypes.string,
+  message: PropTypes.string,
+  status: PropTypes.string,
 }

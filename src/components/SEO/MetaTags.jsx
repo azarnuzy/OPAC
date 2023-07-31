@@ -1,5 +1,5 @@
 // MetaTags.js
-import { checkPropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet-async'
 
 const MetaTags = ({ title, description, keywords, ogImage }) => {
@@ -77,10 +77,10 @@ const MetaTags = ({ title, description, keywords, ogImage }) => {
 export default MetaTags
 
 MetaTags.propTypes = {
-  title: checkPropTypes.string,
-  description: checkPropTypes.string,
-  keywords: checkPropTypes.string,
-  ogTitle: checkPropTypes.string,
-  ogDescription: checkPropTypes.string,
-  ogImage: checkPropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  keywords: PropTypes.string,
+  ogTitle: PropTypes.string,
+  ogDescription: PropTypes.string,
+  ogImage: PropTypes.string,
 }

@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { checkPropTypes } from 'prop-types'
+import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 import SelectOption2 from '../Form/SelectOption2'
 
@@ -206,6 +206,6 @@ export default function Modal({ isOpen, setIsOpen }) {
 }
 
 Modal.propTypes = {
-  isOpen: checkPropTypes.bool,
-  setIsOpen: checkPropTypes.func,
+  isOpen: PropTypes.bool,
+  setIsOpen: PropTypes.func,
 }
