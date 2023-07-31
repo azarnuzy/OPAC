@@ -1,13 +1,12 @@
 import { Listbox, Transition } from '@headlessui/react'
 import { checkPropTypes } from 'prop-types'
 import { Fragment, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getSubject, setSubject } from '../../features/search/searchSlice'
-import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setSubject } from '../../features/search/searchSlice'
 
 function SelectOption2({ filters, width = 'min-w-[300px]' }) {
-  // const { subject } = useParams()
   const [selected, setSelected] = useState(filters[0])
+
   const dispatch = useDispatch()
 
   return (
@@ -22,7 +21,7 @@ function SelectOption2({ filters, width = 'min-w-[300px]' }) {
         <Listbox.Button
           className={`relative w-full cursor-default rounded-lg bg-slate-200 text-light-gray-3 opacity-70 pl-3 pr-10 text-left  sm:text-sm py-2`}
         >
-          <span className='block truncate '>{selected.name}</span>
+          <span className='block truncate '>{selected.name || selected}</span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
             <img
               src='/chevron-up-down2.svg'
@@ -72,7 +71,6 @@ function SelectOption2({ filters, width = 'min-w-[300px]' }) {
 SelectOption2.propTypes = {
   filters: checkPropTypes.array,
   width: checkPropTypes.string,
-  color: checkPropTypes.string,
 }
 
 export default SelectOption2

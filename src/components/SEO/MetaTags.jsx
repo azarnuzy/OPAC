@@ -2,14 +2,7 @@
 import { checkPropTypes } from 'prop-types'
 import { Helmet } from 'react-helmet-async'
 
-const MetaTags = ({
-  title,
-  description,
-  keywords,
-  ogTitle,
-  ogDescription,
-  ogImage,
-}) => {
+const MetaTags = ({ title, description, keywords, ogImage }) => {
   return (
     <Helmet>
       {/* Title */}
@@ -32,11 +25,11 @@ const MetaTags = ({
       {/* Open Graph */}
       <meta
         property='og:title'
-        content={ogTitle || title}
+        content={title}
       />
       <meta
         property='og:description'
-        content={ogDescription || description}
+        content={description}
       />
       <meta
         property='og:image'
@@ -54,11 +47,11 @@ const MetaTags = ({
       />
       <meta
         name='twitter:title'
-        content={ogTitle || title}
+        content={title}
       />
       <meta
         name='twitter:description'
-        content={ogDescription || description}
+        content={description}
       />
       <meta
         name='twitter:image'

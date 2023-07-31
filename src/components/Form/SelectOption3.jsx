@@ -62,7 +62,6 @@ function SelectOption3({ filters, width = 'min-w-[300px]' }) {
 SelectOption3.propTypes = {
   filters: checkPropTypes.array,
   width: checkPropTypes.string,
-  color: checkPropTypes.string,
 }
 
 export default SelectOption3

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SelectOption2 from '../Form/SelectOption2'
 import Modal from './Dialog'
 import { Link, useNavigate } from 'react-router-dom'
@@ -8,6 +8,7 @@ import {
   getSearch,
   getSubject,
   setSearch,
+  setSubject,
 } from '../../features/search/searchSlice'
 import Alert from './Alert'
 
@@ -32,6 +33,11 @@ function Navbar() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setSubject('Judul'))
+    dispatch(setSearch(''))
+  }, [dispatch])
 
   function openModal() {
     setIsOpen(true)
