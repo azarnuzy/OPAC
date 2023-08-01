@@ -74,6 +74,12 @@ const searchSlice = createSlice({
       state.sort = action.payload.sort
       state.type = action.payload.type
     },
+    setSort(state, action) {
+      state.sort = action.payload
+    },
+    setType(state, action) {
+      state.type = action.payload
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchSearch.fulfilled, (state, action) => {
@@ -107,6 +113,7 @@ export const getTotalPage = (state) => state.search.totalPage
 export const getSort = (state) => state.search.sort
 export const getType = (state) => state.search.type
 
-export const { setSearch, setKeyword, setPagination } = searchSlice.actions
+export const { setSearch, setKeyword, setPagination, setSort, setType } =
+  searchSlice.actions
 
 export default searchSlice.reducer

@@ -37,3 +37,25 @@ export const translateFilters = (filter) => {
       return 'title'
   }
 }
+
+export const translateSort = (name) => {
+  switch (name) {
+    case 'Paling Relevan':
+      return 'bibid'
+    case 'Dari yang Terbaru':
+      return 'date'
+    case 'Dari yang Terlama':
+      return 'date'
+  }
+}
+
+export const translateType = (name) => {
+  switch (name) {
+    case 'Paling Relevan':
+      return 'asc'
+    case 'Dari yang Terbaru':
+      return 'asc'
+    case 'Dari yang Terlama':
+      return 'desc'
+  }
+}
