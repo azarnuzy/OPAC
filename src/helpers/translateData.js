@@ -15,7 +15,7 @@ export const translateSearchData = (key) => {
     case 'available':
       return 'Ketersediaan'
     case 'copies':
-      return 'Jumlah Koleksi'
+      return 'Jumlah Salinan'
   }
 }
 

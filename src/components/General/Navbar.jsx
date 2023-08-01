@@ -5,8 +5,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAlert } from '../context/alert-context'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  fetchSearch,
   getKeyword,
-  getSearch,
+  getSearchFilter,
   setKeyword,
   setSearch,
 } from '../../features/search/searchSlice'
@@ -29,7 +30,7 @@ function Navbar() {
   const { handleNotification } = useAlert()
 
   const keyword = useSelector(getKeyword)
-  const subject = useSelector(getSearch)
+  const searchFilter = useSelector(getSearchFilter)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -72,7 +73,19 @@ function Navbar() {
           type='submit'
           onClick={() => {
             if (keyword !== '') {
-              navigate(`/search?search=${keyword}&subject=${subject}`)
+              navigate(
+                `/search?search=${searchFilter}&keyword=${keyword}&page=1&limit=10`
+              )
+              dispatch(
+                fetchSearch({
+                  keyword,
+                  search: searchFilter,
+                  page: 1,
+                  limit: 10,
+                  sort: 'bibid',
+                  type: 'asc',
+                })
+              )
             } else {
               setMessage('Kolom pencarian tidak boleh kosong')
               setStatus('Peringatan')

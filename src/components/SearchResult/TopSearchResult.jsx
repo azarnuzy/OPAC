@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
 import SelectOption3 from '../Form/SelectOption3'
+import { useSelector } from 'react-redux'
+import {
+  getLimit,
+  getPage,
+  getTotalData,
+} from '../../features/search/searchSlice'
 
 const filters = [
   { name: 'Paling Relevan' },
@@ -8,6 +14,10 @@ const filters = [
 ]
 
 function TopSearchResult() {
+  const page = useSelector(getPage)
+  const limit = useSelector(getLimit)
+  const totalData = useSelector(getTotalData)
+
   return (
     <div className=' border-t-[1px] border-light-grayw-full'>
       <div className='flex flex-col sm:flex-row  justify-center sm:justify-between max-w-7xl lg:px-3 sm:px-5 pt-5 sm:py-2 border-t-[1px] border-light-gray mx-auto w-full flex-wrap gap-y-3 items-center'>
@@ -34,7 +44,8 @@ function TopSearchResult() {
             className='hidden sm:block'
           />
           <p className='font-semibold text-light-gray-3'>
-            1 - 10 dari 1680 data
+            {(page - 1) * limit + 1} - {Math.min(page * limit, totalData)} dari{' '}
+            {totalData} data
           </p>
         </div>
         <div className='order-2 lg:order-3'>

@@ -3,25 +3,19 @@ import { Link, useSearchParams } from 'react-router-dom'
 import {
   fetchSearch,
   getIsFirstFetch,
+  getLimit,
+  getPage,
   getSearchData,
+  getSearchFilter,
+  getSort,
+  getTotalPage,
+  getType,
+  setPagination,
 } from '../../features/search/searchSlice'
 import { useEffect } from 'react'
 import Pagination from '../General/Pagination'
 import { searchItemFiltes } from '../../helpers/filterData'
 import { translateSearchData } from '../../helpers/translateData'
-
-// const data = {
-//   pengarang: 'Pengarang',
-//   material: 'Material',
-//   Nomor: 'Nomor',
-//   koleksi: 'Koleksi',
-//   isbn: 'ISBN/ISSN',
-//   'Salinan Barcode': 'Salinan Barcode',
-//   status: 'Status',
-//   ketersediaan: '1',
-// }
-
-// const data2 = [1, 2, 3, 4, 5]
 
 function Content() {
   const [searchParams] = useSearchParams()
@@ -30,19 +24,44 @@ function Content() {
 
   const isFirstFetch = useSelector(getIsFirstFetch)
   const data = useSelector(getSearchData)
+  const searchFilter = useSelector(getSearchFilter)
+  const page = useSelector(getPage)
+  const totalPage = useSelector(getTotalPage)
+  const limit = useSelector(getLimit)
+  const sort = useSelector(getSort)
+  const type = useSelector(getType)
 
   let displayData = []
   if (data) {
     displayData = data?.data?.map(searchItemFiltes)
   }
 
+  const handlePageChange = (page) => {
+    dispatch(
+      setPagination({ page: page, limit: limit, sort: sort, type: type })
+    )
+    console.log('press')
+    dispatch(
+      fetchSearch({ keyword, search: searchFilter, page, limit, sort, type })
+    )
+  }
+
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (!isFirstFetch) {
-      dispatch(fetchSearch({ keyword, search }))
+      dispatch(
+        fetchSearch({
+          keyword,
+          search: searchFilter,
+          page: 1,
+          limit: 10,
+          sort: 'bibid',
+          type: 'asc',
+        })
+      )
     }
-  }, [dispatch, isFirstFetch, keyword, search])
+  }, [dispatch, isFirstFetch, keyword, search, searchFilter])
 
   return (
     <div className='bg-light-gray-2 w-full min-h-[calc(100vh-496px)]'>
@@ -80,7 +99,7 @@ function Content() {
                         return (
                           <div
                             className={`flex gap-2 items-center ${
-                              valueLength > 30 ? 'md:col-span-2' : '' // If the value is long, make it span two columns
+                              valueLength > 30 ? 'md:col-span-2' : ''
                             }`}
                             key={key}
                           >
@@ -111,11 +130,11 @@ function Content() {
             </div>
           )}
         </div>
-        {data?.data?.length === 0 && (
+        {data?.data?.length > 0 && (
           <Pagination
-            currentPage={1}
-            totalPages={5}
-            onPageChange={() => {}}
+            currentPage={page}
+            totalPages={totalPage}
+            onPageChange={handlePageChange}
           />
         )}
       </div>

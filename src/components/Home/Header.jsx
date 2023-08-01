@@ -86,8 +86,19 @@ function Header() {
         <button
           onClick={() => {
             if (keyword !== '') {
-              navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
-              dispatch(fetchSearch({ keyword, search: searchFilter }))
+              navigate(
+                `/search?search=${searchFilter}&keyword=${keyword}&page=1&limit=10`
+              )
+              dispatch(
+                fetchSearch({
+                  keyword,
+                  search: searchFilter,
+                  page: 1,
+                  limit: 10,
+                  sort: 'bibid',
+                  type: 'asc',
+                })
+              )
             } else {
               setMessage('Kolom pencarian tidak boleh kosong')
               setStatus('Peringatan')
