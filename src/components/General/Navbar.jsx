@@ -73,9 +73,7 @@ function Navbar() {
           type='submit'
           onClick={() => {
             if (keyword !== '') {
-              navigate(
-                `/search?search=${searchFilter}&keyword=${keyword}&page=1&limit=10`
-              )
+              navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
               dispatch(
                 fetchSearch({
                   keyword,
