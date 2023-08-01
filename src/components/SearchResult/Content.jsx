@@ -6,6 +6,7 @@ import {
   getSearchData,
 } from '../../features/search/searchSlice'
 import { useEffect } from 'react'
+import Pagination from '../General/Pagination'
 
 // const data = {
 //   pengarang: 'Pengarang',
@@ -93,6 +94,13 @@ function Content() {
             </div>
           )}
         </div>
+        {data?.data?.length === 0 && (
+          <Pagination
+            currentPage={1}
+            totalPages={5}
+            onPageChange={() => {}}
+          />
+        )}
       </div>
     </div>
   )
