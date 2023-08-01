@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import apiConfig from '../../api/apiConfig'
+import { translateFilters } from '../../helpers/translateData'
 
 const initialState = {
   search: 'Judul',
@@ -17,7 +18,7 @@ export const fetchSearch = createAsyncThunk(
   async ({ keyword, search }) => {
     try {
       const response = await axios.get(
-        `${apiConfig.baseUrl}/v1/biblios/basic-search?sort=title&type=asc&search=${search}&key=${keyword}`
+        `${apiConfig.baseUrl}/v1/biblios/basic-search?sort=bibid&type=asc&search=${search}&key=${keyword}`
       )
       return response.data
     } catch (error) {
@@ -49,38 +50,6 @@ export const fetchMaterials = createAsyncThunk(
     }
   }
 )
-
-const translateFilters = (filter) => {
-  switch (filter) {
-    case 'Judul':
-      return 'title'
-    case 'Pengarang':
-      return 'author'
-    case 'Penerbit':
-      return 'publisher'
-    case 'ISBN':
-      return 'isbn'
-    case 'Tahun Terbit':
-      return 'year'
-    case 'Kategori':
-      return 'category'
-    default:
-      return 'title'
-  }
-}
-
-// export const fetchAirport = createAsyncThunk(
-//     'search/fetchAirport',
-//     async () => {
-//       try {
-//         const response = await axios.get(`${apiConfig.baseUrl}airports`);
-//         // console.log(response);
-//         return response.data;
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     }
-//   );
 
 const searchSlice = createSlice({
   name: 'search',

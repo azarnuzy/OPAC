@@ -7,6 +7,8 @@ import {
 } from '../../features/search/searchSlice'
 import { useEffect } from 'react'
 import Pagination from '../General/Pagination'
+import { searchItemFiltes } from '../../helpers/filterData'
+import { translateSearchData } from '../../helpers/translateData'
 
 // const data = {
 //   pengarang: 'Pengarang',
@@ -28,6 +30,11 @@ function Content() {
 
   const isFirstFetch = useSelector(getIsFirstFetch)
   const data = useSelector(getSearchData)
+
+  let displayData = []
+  if (data) {
+    displayData = data?.data?.map(searchItemFiltes)
+  }
 
   const dispatch = useDispatch()
 
@@ -56,26 +63,36 @@ function Content() {
                     height={200}
                     className='rounded-sm shadow-md'
                   />
-                  <div className='flex flex-col'>
-                    <div className='flex flex-col gap-2 mb-3'>
-                      <p className='text-light-gray-3 text-lg font-bold'>
-                        {' '}
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quisquam, voluptatum.
+                  <div className='flex flex-col w-full'>
+                    <div className='flex flex-col mb-3'>
+                      <p className='text-light-gray-3 text-xl font-bold'>
+                        {item.title}
+                      </p>
+                      <p className='text-light-gray-3 text-lg font-medium'>
+                        {item.author ? item.author : '-'}
                       </p>
                     </div>
                     <div className='grid gap-2 grid-cols-1 md:grid-cols-2'>
-                      {Object.entries(data)?.map(([key, value]) => (
-                        <div
-                          className='flex gap-2 items-center'
-                          key={key}
-                        >
-                          <p className='text-light-gray-3 font-semibold'>
-                            {key}
-                          </p>
-                          <p className='text-light-gray-3'>{value}</p>
-                        </div>
-                      ))}
+                      {Object.entries(displayData[i])?.map(([key, value]) => {
+                        // Calculate the length of the value
+                        const valueLength = value ? value.toString().length : 0
+
+                        return (
+                          <div
+                            className={`flex gap-2 items-center ${
+                              valueLength > 30 ? 'md:col-span-2' : '' // If the value is long, make it span two columns
+                            }`}
+                            key={key}
+                          >
+                            <p className='text-light-gray-3 font-semibold'>
+                              {translateSearchData(key)}
+                            </p>
+                            <p className='text-light-gray-3'>
+                              {value ? value : '-'}
+                            </p>
+                          </div>
+                        )
+                      })}
                     </div>
                   </div>
                 </div>

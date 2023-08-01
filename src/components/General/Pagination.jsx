@@ -40,9 +40,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   }
 
   return (
-    <div className='flex items-center justify-center mt-4'>
+    <div className='flex items-center justify-center my-4'>
       <button
-        className='px-4 py-2 mr-2 border rounded-md hover:bg-gray-200'
+        className='px-4 py-2 mr-2 border rounded-md hover:bg-gray-200 text-sm'
         onClick={handlePrevClick}
         disabled={currentPage === 1}
       >
@@ -52,7 +52,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {getPageNumbers().map((page, index) => (
         <button
           key={index}
-          className={`px-4 py-2 mx-2 border rounded-md ${
+          className={`px-4 py-2 mx-2 border rounded-md text-sm ${
             page === currentPage
               ? 'bg-blue-500 text-white'
               : 'hover:bg-gray-200'
@@ -68,7 +68,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       ))}
 
       <button
-        className='px-4 py-2 ml-2 border rounded-md hover:bg-gray-200'
+        className='px-4 py-2 ml-2 border text-sm rounded-md hover:bg-gray-200'
         onClick={handleNextClick}
         disabled={currentPage === totalPages}
       >
