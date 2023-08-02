@@ -37,8 +37,6 @@ function Content() {
     setShowCount(initialShowCount)
   }
 
-  console.log(showCount, initialShowCount)
-
   return (
     <div className='border-t-[1px] pt-5 border-light-gray w-full bg-light-gray-2 min-h-[calc(100vh-539px)] lg:min-h-[calc(100vh-455px)] my-3'>
       <div className='flex gap-3 flex-col md:flex-row max-w-7xl mx-auto px-4'>
@@ -160,7 +158,6 @@ function Content() {
               </button>
             </div>
           )}
-          {console.log('log', showCount, initialShowCount)}
           {showCount > initialShowCount && (
             <div className='mt-2'>
               <button

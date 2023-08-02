@@ -30,7 +30,6 @@ const detailSlice = createSlice({
       state.data = action.payload
       state.dataFilter = filterAttributes(action.payload.data)
       state.isFirstFetch = true
-      console.log(state.dataFilter)
     })
   },
 })

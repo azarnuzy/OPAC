@@ -24,7 +24,7 @@ export const fetchSearch = createAsyncThunk(
   async ({ keyword, search, page, limit, sort, type }) => {
     try {
       const response = await axios.get(
-        `${apiConfig.baseUrl}/v1/biblios/basic-search?sort=bibid&type=asc&search=${search}&key=${keyword}&page=${page}&limit=${limit}&sort=${sort}&type=${type}`
+        `${apiConfig.baseUrl}/v1/biblios/basic-search?search=${search}&key=${keyword}&page=${page}&limit=${limit}&sort=${sort}&type=${type}`
       )
       return response.data
     } catch (error) {
