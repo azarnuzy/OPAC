@@ -51,6 +51,10 @@ export const filterAttributes = (data) => {
 export const formatDateIndonesia = (dateString) => {
   const date = new Date(dateString)
 
+  if (dateString === null) {
+    return '-'
+  }
+
   if (isNaN(date)) {
     return '-'
   }
