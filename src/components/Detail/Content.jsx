@@ -56,7 +56,7 @@ function Content() {
               {data?.data?.material}
             </p>
           </div>
-          <p className='text-light-gray-3 text-lg font-bold'>
+          <p className='text-light-gray-3 text-xl font-bold'>
             {data?.data?.title}
           </p>
           <p className='text-light-gray-3 font-semibold'>
