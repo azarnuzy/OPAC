@@ -37,6 +37,7 @@ function Content() {
   }
 
   const handlePageChange = (page) => {
+    console.log(limit)
     dispatch(
       setPagination({ page: page, limit: limit, sort: sort, type: type })
     )

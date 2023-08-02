@@ -14,14 +14,7 @@ import {
 import Alert from '../General/Alert'
 import { useAlert } from '../context/alert-context'
 
-const filters = [
-  { name: 'Judul' },
-  { name: 'Subjek' },
-  { name: 'Klasifikasi DDC' },
-  { name: 'Material' },
-  { name: 'Tahun' },
-  { name: 'Pengarang' },
-]
+const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
 function Header() {
   let [isOpen, setIsOpen] = useState(false)

@@ -5,7 +5,6 @@ import {
   fetchDetailBiblio,
   getData,
   getDataFilter,
-  getIsFirstFetch,
 } from '../../features/detail/detailSlice'
 import { translateDetailBiblio } from '../../helpers/translateData'
 import { formatDateIndonesia } from '../../helpers/filterData'
@@ -16,13 +15,11 @@ function Content() {
 
   const data = useSelector(getData)
   const dataFilter = useSelector(getDataFilter)
-  const isFirstFetch = useSelector(getIsFirstFetch)
+  // const isFirstFetch = useSelector(getIsFirstFetch)
 
   useEffect(() => {
-    if (!isFirstFetch) {
-      dispatch(fetchDetailBiblio({ id }))
-    }
-  }, [dispatch, id, isFirstFetch])
+    dispatch(fetchDetailBiblio({ id }))
+  }, [dispatch, id])
 
   const initialShowCount = 5 // Set the initial number of titles to be shown
   const [showCount, setShowCount] = useState(initialShowCount)
@@ -128,13 +125,13 @@ function Content() {
         </div>
         <div className='md:w-[250px] w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3'>
           <h2 className='text-lg font-semibold text-dark-gray mb-4'>
-            Recomendation
+            Rekomendasi
           </h2>
           <ul className='space-y-2'>
             {data?.data?.recommendation?.slice(0, showCount).map((title) => (
               <li key={title.bibid}>
                 <Link
-                  to={`/biblio/${title.bibid}`}
+                  to={`/detail/${title.bibid}`}
                   className='block text-blue-600 hover:underline'
                 >
                   <div className='font-semibold'>{title.title}</div>

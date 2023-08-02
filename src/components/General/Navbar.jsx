@@ -13,14 +13,7 @@ import {
 } from '../../features/search/searchSlice'
 import Alert from './Alert'
 
-const filters = [
-  { name: 'Judul' },
-  { name: 'Subjek' },
-  { name: 'Klasifikasi DDC' },
-  { name: 'Material' },
-  { name: 'Tahun' },
-  { name: 'Pengarang' },
-]
+const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
 function Navbar() {
   let [isOpen, setIsOpen] = useState(false)

@@ -87,7 +87,7 @@ const searchSlice = createSlice({
       state.data = action.payload
       state.totalData = action.payload.pagination.totalRows
       state.page = action.payload.pagination.currentPage
-      state.limit = action.payload.pagination.thisPageRows
+      // state.limit = action.payload.pagination.thisPageRows
       state.totalPage = action.payload.pagination.totalPages
     }),
       builder.addCase(fetchCollections.fulfilled, (state, action) => {
