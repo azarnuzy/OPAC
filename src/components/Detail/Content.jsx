@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import {
@@ -24,10 +24,25 @@ function Content() {
     }
   }, [dispatch, id, isFirstFetch])
 
+  const initialShowCount = 5 // Set the initial number of titles to be shown
+  const [showCount, setShowCount] = useState(initialShowCount)
+
+  const handleShowMore = () => {
+    // Update the showCount to display all titles when the "Show More" button is clicked
+    setShowCount(data?.data?.recommendation?.length)
+  }
+
+  const handleShowLess = () => {
+    // Update the showCount to revert to the initial number of titles when the "Show Less" button is clicked
+    setShowCount(initialShowCount)
+  }
+
+  console.log(showCount, initialShowCount)
+
   return (
     <div className='border-t-[1px] pt-5 border-light-gray w-full bg-light-gray-2 min-h-[calc(100vh-539px)] lg:min-h-[calc(100vh-455px)] my-3'>
       <div className='flex gap-3 flex-col md:flex-row max-w-7xl mx-auto px-4'>
-        <div className='w-full md:w-fit flex justify-center md:justify-normal'>
+        <div className='w-full md:w-fit flex flex-col justify-center items-center md:justify-normal'>
           <img
             src='/assets/book.png'
             alt='book'
@@ -35,7 +50,7 @@ function Content() {
             className='w-[250px] h-[330px]  rounded-md shadow-md'
           />
         </div>
-        <div className='flex flex-col gap-1 w-full items-start md:w-[calc(100%-250px)]'>
+        <div className='flex w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3 flex-col gap-1 items-start md:w-[calc(100%-500px)]'>
           <div className='flex gap-2'>
             <img
               src='/bookmark.svg'
@@ -114,34 +129,48 @@ function Content() {
               </tbody>
             </table>
           </div>
-          <div className='w-full h-[1px] bg-slate-300 mb-3 mt-2'></div>
-          <h4 className='text-lg text-light-gray-3 font-bold mb-3'>
-            Rekomendasi Judul Terkait
-          </h4>
-          {/* list of recomendation relevant title   */}
-          <ol className='list-decimal pl-5'>
-            <li className='font-semibold text-light-gray-3 hover:underline'>
-              <Link
-                className='text-lg'
-                to='/detail'
+        </div>
+        <div className='md:w-[250px] w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3'>
+          <h2 className='text-lg font-semibold text-dark-gray mb-4'>
+            Recomendation
+          </h2>
+          <ul className='space-y-2'>
+            {data?.data?.recommendation?.slice(0, showCount).map((title) => (
+              <li key={title.id}>
+                <Link
+                  to={`/biblio/${title.id}`}
+                  className='block text-blue-600 hover:underline'
+                >
+                  <div className='font-semibold'>{title.title}</div>
+                  <div className='text-gray-600'>by {title.author}</div>
+                  <div className='text-gray-600'>
+                    {title.publisher}, {title.year}
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          {showCount < data?.data?.recommendation?.length && (
+            <div className='mt-2'>
+              <button
+                className='text-blue-600 hover:underline mr-2'
+                onClick={handleShowMore}
               >
-                Association of College and Research Libraries 10th National
-                Conference
-              </Link>
-              <p className=''>Kate Manuel, Library Hi Tech News, 2013</p>
-            </li>
-            <li className='font-semibold text-light-gray-3 hover:underline'>
-              <Link
-                className='text-lg'
-                to='/detail'
+                Show More
+              </button>
+            </div>
+          )}
+          {console.log('log', showCount, initialShowCount)}
+          {showCount > initialShowCount && (
+            <div className='mt-2'>
+              <button
+                className='text-blue-600 hover:underline'
+                onClick={handleShowLess}
               >
-                An Empirical Study On Computer Literacy Among Graduating
-                Students In The Bachelor Of Accountancy Programs Of Malysian
-                Public Higher Institutions
-              </Link>
-              <p className=''>Kate Manuel, Library Hi Tech News, 2013</p>
-            </li>
-          </ol>
+                Show Less
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
