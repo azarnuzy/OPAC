@@ -36,7 +36,7 @@ function Content() {
 
   return (
     <div className='border-t-[1px] pt-5 border-light-gray w-full bg-light-gray-2 min-h-[calc(100vh-539px)] lg:min-h-[calc(100vh-455px)] my-3'>
-      <div className='flex gap-3 flex-col md:flex-row max-w-7xl mx-auto px-4'>
+      <div className='flex gap-3 flex-col md:flex-row md:flex-wrap lg:flex-nowrap md:justify-end lg:justify-normal max-w-7xl mx-auto px-4'>
         <div className='w-full md:w-fit flex flex-col justify-center items-center md:justify-normal'>
           <img
             src='/assets/book.png'
@@ -45,7 +45,7 @@ function Content() {
             className='w-[250px] h-[330px]  rounded-md shadow-md'
           />
         </div>
-        <div className='flex w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3 flex-col gap-1 items-start md:w-[calc(100%-500px)]'>
+        <div className='flex w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3 flex-col gap-1 items-start md:w-[calc(100%-265px)] lg:w-[calc(100%-500px)]'>
           <div className='flex gap-2'>
             <img
               src='/bookmark.svg'
@@ -68,14 +68,14 @@ function Content() {
           <h4 className='text-lg text-light-gray-3 font-bold mb-3'>
             Informasi Bibliografi
           </h4>
-          <div className='w-full grid gap-2 grid-cols-1 md:grid-cols-2'>
+          <div className='w-full grid gap-2 grid-cols-1 lg:grid-cols-2'>
             {Object.entries(dataFilter)?.map(([key, value]) => {
               // Calculate the length of the value
               const valueLength = value ? value.toString().length : 0
               return (
                 <div
                   className={`flex gap-2 items-center ${
-                    valueLength > 25 ? 'md:col-span-2' : ''
+                    valueLength > 25 ? 'lg:col-span-2' : ''
                   }`}
                   key={key}
                 >
@@ -123,7 +123,7 @@ function Content() {
             </table>
           </div>
         </div>
-        <div className='md:w-[250px] w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3'>
+        <div className='lg:w-[250px] md:w-[calc(100%-265px)] w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3'>
           <h2 className='text-lg font-semibold text-dark-gray mb-4'>
             Rekomendasi
           </h2>
@@ -135,7 +135,9 @@ function Content() {
                   className='block text-blue-600 hover:underline'
                 >
                   <div className='font-semibold'>{title.title}</div>
-                  <div className='text-gray-600'>by {title.author}</div>
+                  <div className='text-gray-600'>
+                    by {title.author.length > 0 ? title.author : '-'}
+                  </div>
                   <div className='text-gray-600'>
                     {title.publisher}, {title.year}
                   </div>
