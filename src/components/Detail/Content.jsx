@@ -75,7 +75,7 @@ function Content() {
               return (
                 <div
                   className={`flex gap-2 items-center ${
-                    valueLength > 30 ? 'md:col-span-2' : ''
+                    valueLength > 25 ? 'md:col-span-2' : ''
                   }`}
                   key={key}
                 >
