@@ -119,7 +119,8 @@ function Header() {
       </div>
       <div className='px-4 py-2 bg-search-home mt-20'>
         <Link
-          to={'/#'}
+          target='_blank'
+          to={'http://perpustakaan.upi.edu/desiderata'}
           className='text-white text-[14px] underline font-bold'
         >
           Usulkan Buku Baru
