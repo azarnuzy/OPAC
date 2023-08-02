@@ -20,7 +20,7 @@ export default function RoutesComponents() {
           element={<SearchResult />}
         />
         <Route
-          path='/detail'
+          path='/detail/:id'
           element={<Detail />}
         />
       </Route>

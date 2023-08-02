@@ -40,7 +40,6 @@ function Content() {
     dispatch(
       setPagination({ page: page, limit: limit, sort: sort, type: type })
     )
-    console.log('press')
     dispatch(
       fetchSearch({ keyword, search: searchFilter, page, limit, sort, type })
     )
@@ -70,7 +69,7 @@ function Content() {
           {data?.data?.length > 0 ? (
             data?.data?.map((item, i) => (
               <Link
-                to={'/detail'}
+                to={`/detail/${item.biblio_id}`}
                 key={item + i}
                 className='bg-white rounded-lg shadow-lg border border-solid border-light-gray'
               >

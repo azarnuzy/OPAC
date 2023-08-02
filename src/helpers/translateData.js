@@ -59,3 +59,54 @@ export const translateType = (name) => {
       return 'desc'
   }
 }
+
+export const translateDetailBiblio = (name) => {
+  switch (name) {
+    case 'call_number':
+      return 'Nomor Panggil'
+    case 'title':
+      return 'Judul'
+    case 'subtitle':
+      return 'Subjudul'
+    case 'subjects':
+      return 'Subjek'
+    case 'author':
+      return 'Penulis'
+    case 'responsibility':
+      return 'Tanggung Jawab'
+    case 'collection':
+      return 'Koleksi'
+    case 'material':
+      return 'Material'
+    case 'no_id':
+      return 'Nomor Identitas'
+    case 'abstract':
+      return 'Abstrak'
+    case 'edition_stmt':
+      return 'Pernyataan Edisi'
+    case 'ddc':
+      return 'Klasifikasi Desimal Dewey (DDC)'
+    case 'pub_place':
+      return 'Tempat Terbit'
+    case 'pages':
+      return 'Jumlah Halaman'
+    case 'availability_term':
+      return 'Ketersediaan'
+    case 'publisher':
+      return 'Penerbit'
+    case 'pub_year':
+      return 'Tahun Terbit'
+    case 'phisical_detail':
+      return 'Detail Fisik'
+    case 'dimention':
+      return 'Dimensi'
+    case 'source':
+      return 'Sumber'
+    case 'operator':
+      return 'Operator'
+    case 'classification':
+      return 'Klasifikasi'
+    default:
+      return ''
+  }
+}
