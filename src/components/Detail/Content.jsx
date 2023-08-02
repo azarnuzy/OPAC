@@ -63,6 +63,9 @@ function Content() {
             {data?.data?.author}
           </p>
           <div className='w-full h-[1px] bg-slate-300 mb-3'></div>
+          <h4 className='text-lg text-light-gray-3 font-bold mb-3'>
+            Anotasi/Abstrak
+          </h4>
           <p className='text-light-gray-3'>{data?.data?.abstract}</p>
           <div className='w-full h-[1px] bg-slate-300 mb-3'></div>
           <h4 className='text-lg text-light-gray-3 font-bold mb-3'>
