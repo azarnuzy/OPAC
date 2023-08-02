@@ -100,7 +100,6 @@ function Content() {
                 <tr className='bg-gray-800 text-white'>
                   <th className='px-4 py-2'>No</th>
                   <th className='px-4 py-2'>Barcode</th>
-                  <th className='px-4 py-2'>Status Code</th>
                   <th className='px-4 py-2'>Status</th>
                   <th className='px-4 py-2'>Mulai Status</th>
                   <th className='px-4 py-2'>Pengembalian</th>
@@ -114,7 +113,6 @@ function Content() {
                   >
                     <td className='border px-4 py-2'>{item.copy_id}</td>
                     <td className='border px-4 py-2'>{item.barcode}</td>
-                    <td className='border px-4 py-2'>{item.status_code}</td>
                     <td className='border px-4 py-2'>{item.status}</td>
                     <td className='border px-4 py-2'>
                       {formatDateIndonesia(item.begin_date)}
@@ -134,9 +132,9 @@ function Content() {
           </h2>
           <ul className='space-y-2'>
             {data?.data?.recommendation?.slice(0, showCount).map((title) => (
-              <li key={title.id}>
+              <li key={title.bibid}>
                 <Link
-                  to={`/biblio/${title.id}`}
+                  to={`/biblio/${title.bibid}`}
                   className='block text-blue-600 hover:underline'
                 >
                   <div className='font-semibold'>{title.title}</div>
