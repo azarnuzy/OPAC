@@ -6,12 +6,15 @@ import { useAlert } from '../context/alert-context'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchSearch,
+  getIsLoading,
   getKeyword,
   getSearchFilter,
+  setIsLoading,
   setKeyword,
   setSearch,
 } from '../../features/search/searchSlice'
 import Alert from './Alert'
+import Loading from './Loading'
 
 const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
@@ -24,6 +27,7 @@ function Navbar() {
 
   const keyword = useSelector(getKeyword)
   const searchFilter = useSelector(getSearchFilter)
+  const isLoading = useSelector(getIsLoading)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -106,6 +110,11 @@ function Navbar() {
       <Modal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+      />
+      {/* Loading */}
+      <Loading
+        isLoading={isLoading}
+        setIsLoading={dispatch(setIsLoading)}
       />
     </div>
   )

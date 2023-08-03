@@ -5,9 +5,12 @@ import {
   fetchDetailBiblio,
   getData,
   getDataFilter,
+  getIsLoading,
+  setIsLoading,
 } from '../../features/detail/detailSlice'
 import { translateDetailBiblio } from '../../helpers/translateData'
 import { formatDateIndonesia } from '../../helpers/filterData'
+import Loading from '../General/Loading'
 
 function Content() {
   const { id } = useParams()
@@ -15,6 +18,7 @@ function Content() {
 
   const data = useSelector(getData)
   const dataFilter = useSelector(getDataFilter)
+  const isLoading = useSelector(getIsLoading)
   // const isFirstFetch = useSelector(getIsFirstFetch)
 
   useEffect(() => {
@@ -170,6 +174,11 @@ function Content() {
           )}
         </div>
       </div>
+      {/* Loading */}
+      <Loading
+        isLoading={isLoading}
+        setIsLoading={dispatch(setIsLoading)}
+      />
     </div>
   )
 }

@@ -37,7 +37,7 @@ function Content() {
   }
 
   const handlePageChange = (page) => {
-    console.log(limit)
+    window.scrollTo(0, 0)
     dispatch(
       setPagination({ page: page, limit: limit, sort: sort, type: type })
     )
