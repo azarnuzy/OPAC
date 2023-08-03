@@ -5,14 +5,17 @@ import Modal from '../General/Dialog'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchSearch,
+  getIsLoading,
   getKeyword,
   // getSearch,
   getSearchFilter,
+  setIsLoading,
   setKeyword,
   setSearch,
 } from '../../features/search/searchSlice'
 import Alert from '../General/Alert'
 import { useAlert } from '../context/alert-context'
+import Loading from '../General/Loading'
 
 const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
@@ -25,8 +28,8 @@ function Header() {
 
   const dispatch = useDispatch()
   const keyword = useSelector(getKeyword)
-  // const search = useSelector(getSearch)
   const searchFilter = useSelector(getSearchFilter)
+  const isLoading = useSelector(getIsLoading)
 
   useEffect(() => {
     dispatch(setSearch('Judul'))
@@ -77,10 +80,9 @@ function Header() {
           />
         </div>
         <button
-          onClick={() => {
+          onClick={async () => {
             if (keyword !== '') {
-              navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
-              dispatch(
+              await dispatch(
                 fetchSearch({
                   keyword,
                   search: searchFilter,
@@ -90,6 +92,7 @@ function Header() {
                   type: 'asc',
                 })
               )
+              navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
             } else {
               setMessage('Kolom pencarian tidak boleh kosong')
               setStatus('Peringatan')
@@ -131,6 +134,11 @@ function Header() {
       <Modal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+      />
+      {/* Loading */}
+      <Loading
+        isLoading={isLoading}
+        setIsLoading={dispatch(setIsLoading)}
       />
     </div>
   )

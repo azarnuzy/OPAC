@@ -17,6 +17,7 @@ const initialState = {
   limit: 10,
   sort: 'bibid',
   type: 'asc',
+  isLoading: false,
 }
 
 export const fetchSearch = createAsyncThunk(
@@ -80,16 +81,22 @@ const searchSlice = createSlice({
     setType(state, action) {
       state.type = action.payload
     },
+    setIsLoading(state, action) {
+      state.isLoading = action.payload
+    },
   },
   extraReducers(builder) {
-    builder.addCase(fetchSearch.fulfilled, (state, action) => {
-      state.isFirstFetch = true
-      state.data = action.payload
-      state.totalData = action.payload.pagination.totalRows
-      state.page = action.payload.pagination.currentPage
-      // state.limit = action.payload.pagination.thisPageRows
-      state.totalPage = action.payload.pagination.totalPages
+    builder.addCase(fetchSearch.pending, (state) => {
+      state.isLoading = true
     }),
+      builder.addCase(fetchSearch.fulfilled, (state, action) => {
+        state.isFirstFetch = true
+        state.data = action.payload
+        state.totalData = action.payload.pagination.totalRows
+        state.page = action.payload.pagination.currentPage
+        state.totalPage = action.payload.pagination.totalPages
+        state.isLoading = false
+      }),
       builder.addCase(fetchCollections.fulfilled, (state, action) => {
         state.collections = action.payload
       }),
@@ -112,8 +119,15 @@ export const getLimit = (state) => state.search.limit
 export const getTotalPage = (state) => state.search.totalPage
 export const getSort = (state) => state.search.sort
 export const getType = (state) => state.search.type
+export const getIsLoading = (state) => state.search.isLoading
 
-export const { setSearch, setKeyword, setPagination, setSort, setType } =
-  searchSlice.actions
+export const {
+  setSearch,
+  setKeyword,
+  setPagination,
+  setSort,
+  setType,
+  setIsLoading,
+} = searchSlice.actions
 
 export default searchSlice.reducer
