@@ -36,5 +36,5 @@ export default Loading
 
 Loading.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  setIsLoading: PropTypes.func.isRequired,
+  setIsLoading: PropTypes.object.isRequired,
 }

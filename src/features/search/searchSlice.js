@@ -9,6 +9,7 @@ const initialState = {
   keyword: '',
   data: [],
   isFirstFetch: false,
+  isFirstFetchAdvanced: false,
   collections: [],
   materials: [],
   page: 1,
@@ -18,6 +19,13 @@ const initialState = {
   sort: 'bibid',
   type: 'asc',
   isLoading: false,
+  formAdvanced: {
+    material: '',
+    collection: '',
+    title: '',
+    author: '',
+    subject: '',
+  },
 }
 
 export const fetchSearch = createAsyncThunk(
@@ -58,6 +66,33 @@ export const fetchMaterials = createAsyncThunk(
   }
 )
 
+export const fetchSearchAdvanced = createAsyncThunk(
+  'search/fetchSearchAdvanced',
+  async ({ formAdvanced }) => {
+    try {
+      const { material, collection, title, author, subject } = formAdvanced
+      const params = {
+        material: material,
+        collection: collection,
+        title: title,
+        author: author,
+        subject: subject,
+        sort: 'title',
+        type: 'asc',
+        limit: 10,
+      }
+      const response = await axios.get(
+        `${apiConfig.baseUrl}/v1/biblios/advanced-search`,
+        { params }
+      )
+
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+)
+
 const searchSlice = createSlice({
   name: 'search',
   initialState,
@@ -84,6 +119,12 @@ const searchSlice = createSlice({
     setIsLoading(state, action) {
       state.isLoading = action.payload
     },
+    setFormAdvanced(state, action) {
+      state.formAdvanced = {
+        ...state.formAdvanced,
+        [action.payload.name]: action.payload.code,
+      }
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchSearch.pending, (state) => {
@@ -102,6 +143,17 @@ const searchSlice = createSlice({
       }),
       builder.addCase(fetchMaterials.fulfilled, (state, action) => {
         state.materials = action.payload
+      }),
+      builder.addCase(fetchSearchAdvanced.pending, (state) => {
+        state.isLoading = true
+      }),
+      builder.addCase(fetchSearchAdvanced.fulfilled, (state, action) => {
+        state.isFirstFetchAdvanced = true
+        state.data = action.payload
+        state.totalData = action.payload.pagination.totalRows
+        state.page = action.payload.pagination.currentPage
+        state.totalPage = action.payload.pagination.totalPages
+        state.isLoading = false
       })
   },
 })
@@ -111,6 +163,8 @@ export const getKeyword = (state) => state.search.keyword
 export const getSearchFilter = (state) => state.search.searchFilter
 export const getSearchData = (state) => state.search.data
 export const getIsFirstFetch = (state) => state.search.isFirstFetch
+export const getIsFirstFetchAdvanced = (state) =>
+  state.search.isFirstFetchAdvanced
 export const getCollections = (state) => state.search.collections
 export const getMaterials = (state) => state.search.materials
 export const getPage = (state) => state.search.page
@@ -120,6 +174,7 @@ export const getTotalPage = (state) => state.search.totalPage
 export const getSort = (state) => state.search.sort
 export const getType = (state) => state.search.type
 export const getIsLoading = (state) => state.search.isLoading
+export const getFormAdvanced = (state) => state.search.formAdvanced
 
 export const {
   setSearch,
@@ -128,6 +183,7 @@ export const {
   setSort,
   setType,
   setIsLoading,
+  setFormAdvanced,
 } = searchSlice.actions
 
 export default searchSlice.reducer

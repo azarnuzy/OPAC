@@ -1,87 +1,28 @@
 import { Dialog, Transition } from '@headlessui/react'
 import PropTypes from 'prop-types'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import SelectOption2 from '../Form/SelectOption2'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getCollections,
+  getMaterials,
+  setFormAdvanced,
+} from '../../features/search/searchSlice'
+import SelectOption4 from '../Form/SelectOption4'
 
-const filters = [
-  { name: 'Judul' },
-  { name: 'Subjek' },
-  { name: 'Klasifikasi DDC' },
-  { name: 'Material' },
-  { name: 'Tahun' },
-  { name: 'Pengarang' },
-]
-
-const jenisBahan = [
-  { name: 'Monograf' },
-  { name: 'Film' },
-  { name: 'Bahan Kartografis' },
-  { name: 'Rekaman Video' },
-  { name: 'Musik' },
-  { name: 'Bahan Campuran' },
-  { name: 'Rekaman Suara' },
-  { name: 'Bentuk Mikro' },
-  { name: 'Manuskrip' },
-  { name: 'Terbitan Berkala' },
-  { name: 'Braille' },
-  { name: 'Bahan Grafis' },
-  { name: 'Sumber Elektronik' },
-  { name: 'Bentuk Mikro Berkala' },
-  { name: 'Semua Jenis Bahan' },
-]
-
-const bahasa = [
-  { name: 'Indonesia' },
-  { name: 'Inggris' },
-  { name: 'Jerman' },
-  { name: 'Jepang' },
-  { name: 'Arab' },
-  { name: 'Mandarin' },
-  { name: 'Perancis' },
-  { name: 'Belanda' },
-  { name: 'Rusia' },
-  { name: 'Spanyol' },
-  { name: 'Korea' },
-  { name: 'Italia' },
-  { name: 'Jawa' },
-  { name: 'Sunda' },
-  { name: 'Bali' },
-  { name: 'Aceh' },
-  { name: 'Bugis' },
-  { name: 'Tidak ada kode sesuai' },
-  { name: 'Semua Bahasa' },
-]
-
-const targetPembaca = [
-  { name: 'Tidak diketahui / tidak ditentukan' },
-  { name: 'Umum' },
-  { name: 'Anak prasekolah / taman kanak-kanak' },
-  { name: 'Anak sekolah dasar' },
-  { name: 'Anak menjelang remaja' },
-  { name: 'Remaja' },
-  { name: 'Dewasa' },
-  { name: 'tidak ada kode yang sesuai' },
-  { name: 'Semua target pembaca' },
-]
-
-const bentukKarya = [
-  { name: 'Tidak didefinisikan' },
-  { name: 'Bukan fiksi' },
-  { name: 'Drama' },
-  { name: 'Esai' },
-  { name: 'Novel' },
-  { name: 'Puisi' },
-  { name: 'Pidato' },
-  { name: 'Cerita pendek' },
-  { name: 'Karya humor, satir, atau bentuk sastra serupa' },
-  { name: 'Tidak ada kode yang sesuai' },
-  { name: 'Semua bentuk karya' },
-]
+const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
 export default function Modal({ isOpen, setIsOpen }) {
   function closeModal() {
     setIsOpen(false)
   }
+
+  const collections = useSelector(getCollections)
+  const materials = useSelector(getMaterials)
+
+  const [numberOfInput, setNumberOfInput] = useState(1)
+
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -129,64 +70,86 @@ export default function Modal({ isOpen, setIsOpen }) {
                   <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 justify-between w-full'>
                     <div className='flex flex-col gap-2'>
                       <label
-                        htmlFor='judul'
+                        htmlFor='material'
                         className='font-semibold text-light-gray-3 text-sm'
                       >
-                        Jenis Bahan
+                        Material
                       </label>
-                      <SelectOption2 filters={jenisBahan} />
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                      <label
-                        htmlFor='Bahasa'
-                        className='font-semibold text-light-gray-3 text-sm'
-                      >
-                        Bahasa
-                      </label>
-                      <SelectOption2 filters={bahasa} />
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                      <label
-                        htmlFor='Bahasa'
-                        className='font-semibold text-light-gray-3 text-sm'
-                      >
-                        Target Pembaca
-                      </label>
-                      <SelectOption2 filters={targetPembaca} />
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                      <label
-                        htmlFor='Bahasa'
-                        className='font-semibold text-light-gray-3 text-sm'
-                      >
-                        Bentuk Karya
-                      </label>
-                      <SelectOption2 filters={bentukKarya} />
-                    </div>
-                  </div>
-                  <div className='flex flex-col gap-2  mt-3'>
-                    <label
-                      htmlFor='Bahasa'
-                      className='font-semibold text-light-gray-3 text-sm'
-                    >
-                      Kata Kunci
-                    </label>
-                    <div className='flex gap-3'>
-                      <input
-                        id='search-input'
-                        placeholder='Ketik disini'
-                        className=' sm:w-[370px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+                      <SelectOption4
+                        filters={materials?.data}
+                        name={'material'}
                       />
-                      <SelectOption2
-                        filters={filters}
-                        width='sm:w-[calc(100%-420px)]'
-                      />
-                      <img
-                        src='/plus.svg'
-                        alt='plus'
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label
+                        htmlFor='koleksi'
+                        className='font-semibold text-light-gray-3 text-sm'
+                      >
+                        Koleksi
+                      </label>
+                      <SelectOption4
+                        filters={collections?.data}
+                        name={'collection'}
                       />
                     </div>
                   </div>
+                  {Array.from(Array(numberOfInput), (e, i) => {
+                    return (
+                      <div
+                        className='flex flex-col gap-2  mt-3'
+                        key={i}
+                      >
+                        {i === 0 && (
+                          <label
+                            htmlFor='Bahasa'
+                            className='font-semibold text-light-gray-3 text-sm'
+                          >
+                            Kata Kunci
+                          </label>
+                        )}
+                        <div className='flex gap-3'>
+                          <input
+                            name='keyword'
+                            id='search-input'
+                            placeholder='Ketik disini'
+                            className='w-[calc(100%-150px)] sm:w-[370px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+                            onChange={(e) => {
+                              const { name, value } = e.target
+                              dispatch(setFormAdvanced({ name, code: value }))
+                            }}
+                          />
+                          <SelectOption2
+                            filters={filters}
+                            width='sm:w-[calc(100%-420px)]'
+                          />
+                          {i === numberOfInput - 1 && i !== 0 && (
+                            <button
+                              onClick={() => {
+                                setNumberOfInput(numberOfInput - 1)
+                              }}
+                            >
+                              <img
+                                src='/minus.svg'
+                                alt='minus'
+                              />
+                            </button>
+                          )}
+                          {i === 0 && (
+                            <button
+                              onClick={() => {
+                                setNumberOfInput(numberOfInput + 1)
+                              }}
+                            >
+                              <img
+                                src='/plus.svg'
+                                alt='plus'
+                              />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
                   <div className='w-full flex justify-end gap-2 mt-3'>
                     <button className='bg-gray-300 w-[120px] py-2  rounded-full text-dark-gray  text-sm font-medium'>
                       Hapus
