@@ -16,7 +16,7 @@ import Pagination from '../General/Pagination'
 import { searchItemFiltes } from '../../helpers/filterData'
 import { translateSearchData } from '../../helpers/translateData'
 
-function Content() {
+function ContentAdvancedSearch() {
   const [searchParams] = useSearchParams()
   const material = searchParams.get('material')
   const collection = searchParams.get('collection')
@@ -155,4 +155,4 @@ function Content() {
   )
 }
 
-export default Content
+export default ContentAdvancedSearch
