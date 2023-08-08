@@ -4,12 +4,9 @@ import { useEffect, useState } from 'react'
 import Modal from '../General/Dialog'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  fetchCollections,
-  fetchMaterials,
   fetchSearch,
   getIsLoading,
   getKeyword,
-  // getSearch,
   getSearchFilter,
   setIsLoading,
   setKeyword,
@@ -36,8 +33,6 @@ function Header() {
   useEffect(() => {
     dispatch(setSearch('Judul'))
     dispatch(setKeyword(''))
-    dispatch(fetchCollections())
-    dispatch(fetchMaterials())
   }, [dispatch])
 
   const navigate = useNavigate()

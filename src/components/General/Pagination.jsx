@@ -52,7 +52,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {getPageNumbers().map((page, index) => (
         <button
           key={index}
-          className={`px-4 py-2 mx-2 border rounded-md text-sm ${
+          className={`px-2 sm:px-4 py-1 sm:py-2 sm:mx-2 mx-1 border rounded-md text-sm ${
             page === currentPage
               ? 'bg-blue-500 text-white'
               : 'hover:bg-gray-200'
@@ -68,7 +68,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       ))}
 
       <button
-        className='px-4 py-2 ml-2 border text-sm rounded-md hover:bg-gray-200'
+        className=' px-2 sm:px-4  py-1 sm:py-2 ml-2 border text-sm rounded-md hover:bg-gray-200'
         onClick={handleNextClick}
         disabled={currentPage === totalPages}
       >

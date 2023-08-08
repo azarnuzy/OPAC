@@ -1,8 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
 import PropTypes from 'prop-types'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  fetchCollections,
+  fetchMaterials,
   fetchSearchAdvanced,
   getCollections,
   getFormAdvanced,
@@ -18,15 +20,20 @@ import { useNavigate } from 'react-router-dom'
 const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
 export default function Modal({ isOpen, setIsOpen }) {
+  const dispatch = useDispatch()
   function closeModal() {
     setIsOpen(false)
   }
+
+  useEffect(() => {
+    dispatch(fetchCollections())
+    dispatch(fetchMaterials())
+  }, [dispatch])
 
   const collections = useSelector(getCollections)
   const materials = useSelector(getMaterials)
   const formAdvanced = useSelector(getFormAdvanced)
 
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const [inputForm, setInputForm] = useState([
