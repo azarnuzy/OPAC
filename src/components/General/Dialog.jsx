@@ -122,7 +122,7 @@ export default function Modal({ isOpen, setIsOpen }) {
     e.preventDefault()
     await dispatch(fetchSearchAdvanced({ formAdvanced }))
     navigate({
-      pathname: '/search',
+      pathname: '/advanced-search',
       search: `?${new URLSearchParams(formAdvanced).toString()}`,
     })
   }

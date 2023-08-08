@@ -80,6 +80,9 @@ export const fetchSearchAdvanced = createAsyncThunk(
         subject,
         publisher = '',
         year = '',
+        sort = 'title',
+        type = 'asc',
+        limit = 10,
       } = formAdvanced
       const params = {
         material: material,
@@ -87,9 +90,9 @@ export const fetchSearchAdvanced = createAsyncThunk(
         title: title,
         author: author,
         subject: subject,
-        sort: 'title',
-        type: 'asc',
-        limit: 10,
+        sort: sort,
+        type: type,
+        limit: limit,
         publisher: publisher,
         year: year,
       }
