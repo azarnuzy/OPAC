@@ -1,11 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
 import PropTypes from 'prop-types'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getCollections,
-  getFormAdvanced,
   getMaterials,
+  setEmptyFormAdvanced,
   setFormAdvanced,
 } from '../../features/search/searchSlice'
 import SelectOption4 from '../Form/SelectOption4'
@@ -31,12 +31,15 @@ export default function Modal({ isOpen, setIsOpen }) {
       filters: filters,
     },
   ])
+  const [selectedMaterial, setSelectedMaterial] = useState({
+    code: '',
+    description: 'Pilih salah satu',
+  })
 
-  const formAdvanced = useSelector(getFormAdvanced)
-
-  useEffect(() => {
-    console.log(formAdvanced)
-  }, [formAdvanced])
+  const [selectedCollection, setSelectedCollection] = useState({
+    code: '',
+    description: 'Pilih salah satu',
+  })
 
   const setAdvancedFrom = (formInput) => {
     dispatch(
@@ -81,6 +84,19 @@ export default function Modal({ isOpen, setIsOpen }) {
 
     setAdvancedFrom(formInput)
     setInputForm(newinputForm)
+  }
+
+  const resetForm = () => {
+    dispatch(setEmptyFormAdvanced())
+    setInputForm([{ keyword: '', search: '', filters: filters }])
+    setSelectedMaterial({
+      code: '',
+      description: 'Pilih salah satu',
+    })
+    setSelectedCollection({
+      code: '',
+      description: 'Pilih salah satu',
+    })
   }
 
   return (
@@ -137,6 +153,8 @@ export default function Modal({ isOpen, setIsOpen }) {
                       <SelectOption4
                         filters={materials?.data}
                         name={'material'}
+                        selected={selectedMaterial}
+                        setSelected={setSelectedMaterial}
                       />
                     </div>
                     <div className='flex flex-col gap-2'>
@@ -149,6 +167,8 @@ export default function Modal({ isOpen, setIsOpen }) {
                       <SelectOption4
                         filters={collections?.data}
                         name={'collection'}
+                        selected={selectedCollection}
+                        setSelected={setSelectedCollection}
                       />
                     </div>
                   </div>
@@ -213,7 +233,10 @@ export default function Modal({ isOpen, setIsOpen }) {
                     </div>
                   ))}
                   <div className='w-full flex justify-end gap-2 mt-3'>
-                    <button className='bg-gray-300 w-[120px] py-2  rounded-full text-dark-gray  text-sm font-medium'>
+                    <button
+                      className='bg-gray-300 w-[120px] py-2  rounded-full text-dark-gray  text-sm font-medium'
+                      onClick={resetForm}
+                    >
                       Hapus
                     </button>
                     <button className='bg-soft-yellow w-[120px] py-2  rounded-full text-white text-sm font-medium'>

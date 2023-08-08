@@ -125,6 +125,15 @@ const searchSlice = createSlice({
         [action.payload.name]: action.payload.code,
       }
     },
+    setEmptyFormAdvanced(state) {
+      state.formAdvanced = {
+        material: '',
+        collection: '',
+        title: '',
+        author: '',
+        subject: '',
+      }
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchSearch.pending, (state) => {
@@ -184,6 +193,7 @@ export const {
   setType,
   setIsLoading,
   setFormAdvanced,
+  setEmptyFormAdvanced,
 } = searchSlice.actions
 
 export default searchSlice.reducer

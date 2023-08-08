@@ -1,15 +1,16 @@
 import { Listbox, Transition } from '@headlessui/react'
 import PropTypes from 'prop-types'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { useDispatch } from 'react-redux'
 import { setFormAdvanced } from '../../features/search/searchSlice'
 
-function SelectOption4({ filters, width = 'min-w-[300px]', name }) {
-  const [selected, setSelected] = useState({
-    code: '',
-    description: 'Pilih salah satu',
-  })
-
+function SelectOption4({
+  filters,
+  width = 'min-w-[300px]',
+  name,
+  selected,
+  setSelected,
+}) {
   const dispatch = useDispatch()
 
   return (
@@ -91,6 +92,8 @@ SelectOption4.propTypes = {
   filters: PropTypes.array,
   width: PropTypes.string,
   name: PropTypes.string,
+  selected: PropTypes.object,
+  setSelected: PropTypes.func,
 }
 
 export default SelectOption4
