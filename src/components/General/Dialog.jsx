@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  fetchSearchAdvanced,
   getCollections,
+  getFormAdvanced,
   getMaterials,
   setEmptyFormAdvanced,
   setFormAdvanced,
@@ -11,6 +13,7 @@ import {
 import SelectOption4 from '../Form/SelectOption4'
 import SelectOption5 from '../Form/SelectOption5'
 import { formAdvancedFilter } from '../../helpers/filterData'
+import { useNavigate } from 'react-router-dom'
 
 const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
@@ -21,8 +24,10 @@ export default function Modal({ isOpen, setIsOpen }) {
 
   const collections = useSelector(getCollections)
   const materials = useSelector(getMaterials)
+  const formAdvanced = useSelector(getFormAdvanced)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [inputForm, setInputForm] = useState([
     {
@@ -39,6 +44,14 @@ export default function Modal({ isOpen, setIsOpen }) {
   const [selectedCollection, setSelectedCollection] = useState({
     code: '',
     description: 'Pilih salah satu',
+  })
+
+  const [publisher, setPublisher] = useState('')
+  const [inputYear, setInputYear] = useState(true)
+  const [year, setYear] = useState({
+    from: '',
+    to: '',
+    year: '',
   })
 
   const setAdvancedFrom = (formInput) => {
@@ -97,6 +110,21 @@ export default function Modal({ isOpen, setIsOpen }) {
       code: '',
       description: 'Pilih salah satu',
     })
+    setPublisher('')
+    setYear({
+      from: '',
+      to: '',
+      year: '',
+    })
+  }
+
+  const submitForm = async (e) => {
+    e.preventDefault()
+    await dispatch(fetchSearchAdvanced({ formAdvanced }))
+    navigate({
+      pathname: '/search',
+      search: `?${new URLSearchParams(formAdvanced).toString()}`,
+    })
   }
 
   return (
@@ -124,7 +152,10 @@ export default function Modal({ isOpen, setIsOpen }) {
           </Transition.Child>
 
           <div className='fixed inset-0 overflow-y-auto'>
-            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+            <form
+              onSubmit={(e) => submitForm(e)}
+              className='flex min-h-full items-center justify-center p-4 text-center'
+            >
               <Transition.Child
                 as={Fragment}
                 enter='ease-out duration-300'
@@ -171,6 +202,127 @@ export default function Modal({ isOpen, setIsOpen }) {
                         setSelected={setSelectedCollection}
                       />
                     </div>
+                    <div className='flex flex-col gap-2'>
+                      <label
+                        htmlFor='publisher'
+                        className='font-semibold text-light-gray-3 text-sm'
+                      >
+                        Penerbit
+                      </label>
+                      <input
+                        name='publisher'
+                        id='publisher'
+                        placeholder='Ketik disini'
+                        className='w-full sm:w-[300px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+                        value={publisher}
+                        onChange={(e) => {
+                          setPublisher(e.target.value)
+                          dispatch(
+                            setFormAdvanced({
+                              name: 'publisher',
+                              code: e.target.value,
+                            })
+                          )
+                        }}
+                      />
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label
+                        htmlFor='year'
+                        className='font-semibold text-light-gray-3 text-sm flex gap-2 items-center justify-between'
+                      >
+                        {inputYear ? 'Tahun' : 'Rentang Tahun'}
+                        <div
+                          className='cursor-pointer'
+                          onClick={() => {
+                            dispatch(
+                              setFormAdvanced({
+                                name: 'year',
+                                code: '',
+                              })
+                            )
+                            setInputYear(!inputYear)
+                            if (inputYear) {
+                              setYear({ ...year, from: '', to: '' })
+                            } else {
+                              setYear({ ...year, year: '' })
+                            }
+                          }}
+                        >
+                          <img
+                            src='/change.svg'
+                            alt='change'
+                            width={20}
+                            height={20}
+                          />
+                        </div>
+                      </label>
+                      <div className='flex gap-2 sm:w-[300px] w-full'>
+                        {inputYear ? (
+                          <input
+                            name='year'
+                            id='year'
+                            type='number'
+                            min={1970}
+                            max={2100}
+                            placeholder='Tahun '
+                            className='w-full  text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+                            value={year.year}
+                            onChange={(e) => {
+                              setYear({ ...year, year: e.target.value })
+                              dispatch(
+                                setFormAdvanced({
+                                  name: 'year',
+                                  code: e.target.value,
+                                })
+                              )
+                            }}
+                          />
+                        ) : (
+                          <>
+                            <input
+                              name='fromYear'
+                              id='fromYear'
+                              type='number'
+                              min={1970}
+                              max={2100}
+                              required={year.to !== ''}
+                              placeholder='Dari '
+                              className='w-full sm:w-1/2 text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+                              value={year.from}
+                              onChange={(e) => {
+                                setYear({ ...year, from: e.target.value })
+                                dispatch(
+                                  setFormAdvanced({
+                                    name: 'year',
+                                    code: `${e.target.value},${year.to}`,
+                                  })
+                                )
+                              }}
+                            />
+                            <input
+                              name='year'
+                              id='year'
+                              type='number'
+                              min={1970}
+                              max={2100}
+                              placeholder='Sampai '
+                              className='w-full sm:w-1/2 text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+                              value={year.to}
+                              onChange={(e) => {
+                                setYear({ ...year, to: e.target.value })
+                                dispatch(
+                                  setFormAdvanced({
+                                    name: 'year',
+                                    code: `${year.from},${e.target.value}`,
+                                  })
+                                )
+                              }}
+                            />
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   {inputForm.map((item, index) => (
                     <div
@@ -206,8 +358,8 @@ export default function Modal({ isOpen, setIsOpen }) {
                         />
                         {index !== 0 && (
                           <button
+                            type='button'
                             onClick={() => {
-                              console.log(index)
                               handleRemoveFormComponent(index)
                             }}
                           >
@@ -219,9 +371,8 @@ export default function Modal({ isOpen, setIsOpen }) {
                         )}
                         {index === 0 && (
                           <button
-                            onClick={() => {
-                              handleAddFormComponent()
-                            }}
+                            type='button'
+                            onClick={handleAddFormComponent}
                           >
                             <img
                               src='/plus.svg'
@@ -239,13 +390,16 @@ export default function Modal({ isOpen, setIsOpen }) {
                     >
                       Hapus
                     </button>
-                    <button className='bg-soft-yellow w-[120px] py-2  rounded-full text-white text-sm font-medium'>
+                    <button
+                      className='bg-soft-yellow w-[120px] py-2  rounded-full text-white text-sm font-medium'
+                      type='submit'
+                    >
                       Cari
                     </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
-            </div>
+            </form>
           </div>
         </Dialog>
       </Transition>

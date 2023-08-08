@@ -1,18 +1,25 @@
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { setIsLoading } from '../../features/search/searchSlice'
+import { setIsLoading as setIsLoading2 } from '../../features/detail/detailSlice'
 
-function Loading({ isLoading, setIsLoading }) {
+function Loading({ isLoading }) {
+  const dispatch = useDispatch()
   return (
     <div
       className={`${
         isLoading ? 'fixed ' : 'hidden '
       } inset-0 z-50 flex items-center justify-center bg-[#00000041]`}
     >
-      <div className='absolute top-5 right-5'>
+      <div className='absolute top-5 right-5 z-50'>
         <img
           src='/cross.svg'
           alt='cross'
           className='font-white w-10 h-10 cursor-pointer text-[30px] text-white'
-          onClick={() => setIsLoading(false)}
+          onClick={() => {
+            dispatch(setIsLoading(false))
+            dispatch(setIsLoading2(false))
+          }}
         />
       </div>
       <svg

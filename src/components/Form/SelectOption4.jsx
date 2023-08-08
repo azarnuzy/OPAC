@@ -58,7 +58,7 @@ function SelectOption4({
           leaveTo='opacity-0'
         >
           <Listbox.Options className='absolute mt-1 max-h-40 w-full overflow-auto rounded-md bg-white text-base shadow-lg ring-black ring-opacity-5 focus:outline-none sm:text-sm z-30'>
-            {filters.map((person, personIdx) => (
+            {filters?.map((person, personIdx) => (
               <Listbox.Option
                 key={personIdx}
                 className={({ active }) =>

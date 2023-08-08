@@ -25,6 +25,8 @@ const initialState = {
     title: '',
     author: '',
     subject: '',
+    publisher: '',
+    year: '',
   },
 }
 
@@ -70,7 +72,15 @@ export const fetchSearchAdvanced = createAsyncThunk(
   'search/fetchSearchAdvanced',
   async ({ formAdvanced }) => {
     try {
-      const { material, collection, title, author, subject } = formAdvanced
+      const {
+        material,
+        collection,
+        title,
+        author,
+        subject,
+        publisher = '',
+        year = '',
+      } = formAdvanced
       const params = {
         material: material,
         collection: collection,
@@ -80,6 +90,8 @@ export const fetchSearchAdvanced = createAsyncThunk(
         sort: 'title',
         type: 'asc',
         limit: 10,
+        publisher: publisher,
+        year: year,
       }
       const response = await axios.get(
         `${apiConfig.baseUrl}/v1/biblios/advanced-search`,
@@ -132,6 +144,8 @@ const searchSlice = createSlice({
         title: '',
         author: '',
         subject: '',
+        publisher: '',
+        year: '',
       }
     },
   },
