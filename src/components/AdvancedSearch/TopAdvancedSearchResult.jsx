@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import SelectOption3 from '../Form/SelectOption3'
 import { useSelector } from 'react-redux'
 import {
   getLimit,
   getPage,
   getTotalData,
 } from '../../features/search/searchSlice'
+import SelectOption6 from '../Form/SelectOption6'
 
 const filters = [
   { name: 'Paling Relevan' },
@@ -49,7 +49,7 @@ function TopAdvancedSearchResult() {
           </p>
         </div>
         <div className='order-2 lg:order-3'>
-          <SelectOption3
+          <SelectOption6
             filters={filters}
             width='w-fit'
           />

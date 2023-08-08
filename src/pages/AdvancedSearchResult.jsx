@@ -1,9 +1,9 @@
 import ContentAdvancedSearch from '../components/AdvancedSearch/ContentAdvanced'
+import TopAdvancedSearchResult from '../components/AdvancedSearch/TopAdvancedSearchResult'
 import Footer from '../components/General/Footer'
 import Navbar from '../components/General/Navbar'
 import Topbar from '../components/General/Topbar'
 import MetaTags from '../components/SEO/MetaTags'
-import TopSearchResult from '../components/SearchResult/TopSearchResult'
 
 function AdvancedSearchResult() {
   return (
@@ -16,7 +16,7 @@ function AdvancedSearchResult() {
       />
       <Topbar />
       <Navbar />
-      <TopSearchResult />
+      <TopAdvancedSearchResult />
       <ContentAdvancedSearch />
       <Footer />
     </>
