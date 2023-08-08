@@ -69,3 +69,25 @@ export const formatDateIndonesia = (dateString) => {
     timeZone: 'Asia/Jakarta', // Set the time zone to Indonesia (GMT+7)
   })
 }
+
+export const formAdvancedFilter = (dataArray) => {
+  const formAdvanced = { title: '', author: '', subject: '' }
+  console.log(dataArray)
+  dataArray.forEach((item) => {
+    const { keyword, search } = item
+    if (search === 'Judul') {
+      formAdvanced.title += keyword + ','
+    } else if (search === 'Pengarang') {
+      formAdvanced.author += keyword + ','
+    } else if (search === 'Subjek') {
+      formAdvanced.subject += keyword + ','
+    }
+  })
+
+  // Remove the trailing comma from each field
+  formAdvanced.title = formAdvanced.title.slice(0, -1)
+  formAdvanced.author = formAdvanced.author.slice(0, -1)
+  formAdvanced.subject = formAdvanced.subject.slice(0, -1)
+
+  return formAdvanced
+}
