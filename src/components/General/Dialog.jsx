@@ -313,6 +313,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                               type='number'
                               min={1970}
                               max={2100}
+                              required={year.from !== ''}
                               placeholder='Sampai '
                               className='w-full sm:w-1/2 text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
                               value={year.to}
