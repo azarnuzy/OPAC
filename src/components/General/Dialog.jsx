@@ -393,6 +393,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                   ))}
                   <div className='w-full flex justify-end gap-2 mt-3'>
                     <button
+                      type='button'
                       className='bg-gray-300 w-[120px] py-2  rounded-full text-dark-gray  text-sm font-medium'
                       onClick={resetForm}
                     >
