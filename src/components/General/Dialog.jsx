@@ -270,7 +270,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                             name='year'
                             id='year'
                             type='number'
-                            min={1970}
+                            min={1900}
                             max={2100}
                             placeholder='Tahun '
                             className='w-full  text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
@@ -291,7 +291,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                               name='fromYear'
                               id='fromYear'
                               type='number'
-                              min={1970}
+                              min={1900}
                               max={2100}
                               required={year.to !== ''}
                               placeholder='Dari '
@@ -311,7 +311,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                               name='year'
                               id='year'
                               type='number'
-                              min={1970}
+                              min={1900}
                               max={2100}
                               required={year.from !== ''}
                               placeholder='Sampai '
