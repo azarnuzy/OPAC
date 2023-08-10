@@ -91,28 +91,23 @@ function Content() {
                         {item.author ? item.author : '-'}
                       </p>
                     </div>
-                    <div className='grid gap-2 grid-cols-1 md:grid-cols-2'>
-                      {Object.entries(displayData[i])?.map(([key, value]) => {
-                        // Calculate the length of the value
-                        const valueLength = value ? value.toString().length : 0
-
-                        return (
-                          <div
-                            className={`flex gap-2 items-center ${
-                              valueLength > 30 ? 'md:col-span-2' : ''
-                            }`}
-                            key={key}
-                          >
-                            <p className='text-light-gray-3 font-semibold'>
-                              {translateSearchData(key)}
-                            </p>
-                            <p className='text-light-gray-3'>
-                              {value ? value : '-'}
-                            </p>
-                          </div>
-                        )
-                      })}
-                    </div>
+                    <table className='w-full'>
+                      <tbody className='grid gap-2 grid-cols-1 md:grid-cols-2'>
+                        {Object.entries(displayData[i])?.map(([key, value]) => {
+                          return (
+                            <tr key={key}>
+                              <td className=' items-start text-light-gray-3 font-bold grid-cols-2 md:w-[120px] lg:w-36 '>
+                                {translateSearchData(key)}
+                              </td>
+                              <td className='font-semibold w-4'>:</td>
+                              <td className='text-light-gray-3 font-mono'>
+                                {value ? value : '-'}
+                              </td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </Link>

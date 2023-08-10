@@ -75,25 +75,23 @@ function Content() {
           <h4 className='text-lg text-light-gray-3 font-bold mb-3'>
             Informasi Bibliografi
           </h4>
-          <div className='w-full grid gap-2 grid-cols-1 lg:grid-cols-2'>
-            {Object.entries(dataFilter)?.map(([key, value]) => {
-              // Calculate the length of the value
-              const valueLength = value ? value.toString().length : 0
-              return (
-                <div
-                  className={`flex gap-2 items-center ${
-                    valueLength > 25 ? 'lg:col-span-2' : ''
-                  }`}
-                  key={key}
-                >
-                  <p className='text-light-gray-3 font-semibold'>
-                    {translateDetailBiblio(key)}
-                  </p>
-                  <p className='text-light-gray-3'>{value ? value : '-'}</p>
-                </div>
-              )
-            })}
-          </div>
+          <table className='w-full'>
+            <tbody className='grid gap-2 grid-cols-1 '>
+              {Object.entries(dataFilter)?.map(([key, value]) => {
+                return (
+                  <tr key={key}>
+                    <td className='pr-4 items-start text-light-gray-3 font-bold grid-cols-2 md:w-52 '>
+                      {translateDetailBiblio(key)}
+                    </td>
+                    <td className='font-semibold w-4'>:</td>
+                    <td className='text-light-gray-3  font-mono'>
+                      {value ? value : '-'}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
           <div className='w-full h-[1px] bg-slate-300 mb-3'></div>
           <h4 className='text-lg text-light-gray-3 font-bold mb-3'>
             Informasi Salinan Bibliografi

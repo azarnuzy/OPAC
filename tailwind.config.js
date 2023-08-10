@@ -37,6 +37,7 @@ export default {
     },
     fontFamily: {
       sans: ['Helvetica', 'Poppins', 'sans-serif'],
+      mono: ['"Source Code Pro"', 'monospace'],
     },
   },
   plugins: [],
