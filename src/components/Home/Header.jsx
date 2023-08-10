@@ -42,6 +42,28 @@ function Header() {
     setIsOpen(true)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (keyword !== '') {
+      dispatch(
+        fetchSearch({
+          keyword,
+          search: searchFilter,
+          page: 1,
+          limit: 10,
+          sort: 'bibid',
+          type: 'asc',
+        })
+      )
+      dispatch(setEmptyFormAdvanced())
+      navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
+    } else {
+      setMessage('Kolom pencarian tidak boleh kosong')
+      setStatus('Peringatan')
+      handleNotification()
+    }
+  }
+
   return (
     <div className='w-full h-[calc(100vh-44px)] flex flex-col items-center pt-16 sm:pt-0 sm:justify-center bg-cover object-center relative z-10'>
       <Alert
@@ -56,7 +78,10 @@ function Header() {
       <div className='mb-10 text-3xl sm:text-5xl text-center font-bold text-white'>
         Online Public Access Catalog
       </div>
-      <div className='flex flex-col sm:flex-row md:max-w-[912px] md:w-fit bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-col sm:flex-row md:max-w-[912px] md:w-fit bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'
+      >
         <SelectOption
           filters={filters}
           width={'min-w-[120px]'}
@@ -80,32 +105,12 @@ function Header() {
           />
         </div>
         <button
-          onClick={async () => {
-            if (keyword !== '') {
-              await dispatch(
-                fetchSearch({
-                  keyword,
-                  search: searchFilter,
-                  page: 1,
-                  limit: 10,
-                  sort: 'bibid',
-                  type: 'asc',
-                })
-              )
-              dispatch(setEmptyFormAdvanced())
-              navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
-            } else {
-              setMessage('Kolom pencarian tidak boleh kosong')
-              setStatus('Peringatan')
-              handleNotification()
-            }
-          }}
           className='bg-white rounded-2xl px-4 text-dark-blue text-sm font-semibold sm:w-min w-[150px] py-1 mx-auto text-center'
           type='submit'
         >
           Search
         </button>
-      </div>
+      </form>
       <div className='relative w-full sm:w-[650px] flex justify-center'>
         <div className='flex justify-center items-center absolute bg-white z-0 rounded-b-2xl text-dark-blue w-[calc(100%-60px)] sm:w-[calc(100%-120px)] gap-2 pb-1 pt-2 -top-1'>
           <p className='font-bold text-dark-blue text-[12px] sm:text-[14px] text-center'>
@@ -124,7 +129,7 @@ function Header() {
       <div className='px-4 py-2 bg-search-home mt-20'>
         <Link
           target='_blank'
-          to={'http://perpustakaan.upi.edu/desiderata'}
+          to={'https://perpustakaan.upi.edu/desiderata'}
           className='text-white text-[14px] underline font-bold'
         >
           Usulkan Buku Baru

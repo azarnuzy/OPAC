@@ -40,6 +40,28 @@ function Navbar() {
   function openModal() {
     setIsOpen(true)
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (keyword !== '') {
+      navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
+      dispatch(
+        fetchSearch({
+          keyword,
+          search: searchFilter,
+          page: 1,
+          limit: 10,
+          sort: 'bibid',
+          type: 'asc',
+        })
+      )
+    } else {
+      setMessage('Kolom pencarian tidak boleh kosong')
+      setStatus('Peringatan')
+      handleNotification()
+    }
+  }
+
   return (
     <div className='flex flex-col lg:flex-row items-center sm:justify-between w-full mx-auto max-w-7xl lg:px-3 sm:px-5 py-2'>
       <Alert
@@ -53,7 +75,10 @@ function Navbar() {
           className='w-[200px] sm:w-[300px]'
         />
       </Link>
-      <div className='flex flex-wrap lg:flex-nowrap justify-center lg:justify-normal gap-2 items-center'>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-wrap lg:flex-nowrap justify-center lg:justify-normal gap-2 items-center'
+      >
         <SelectOption2
           filters={filters}
           width='w-[300px]  lg:min-w-[150px] '
@@ -68,25 +93,6 @@ function Navbar() {
         <button
           className='flex items-center pl-2 pr-4 lg:p-0 gap-2 bg-light-gray rounded-full'
           type='submit'
-          onClick={() => {
-            if (keyword !== '') {
-              navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
-              dispatch(
-                fetchSearch({
-                  keyword,
-                  search: searchFilter,
-                  page: 1,
-                  limit: 10,
-                  sort: 'bibid',
-                  type: 'asc',
-                })
-              )
-            } else {
-              setMessage('Kolom pencarian tidak boleh kosong')
-              setStatus('Peringatan')
-              handleNotification()
-            }
-          }}
         >
           <img
             src='/search2.svg'
@@ -104,7 +110,7 @@ function Navbar() {
         >
           Advanced Search
         </button>
-      </div>
+      </form>
 
       {/* Modal */}
       <Modal
