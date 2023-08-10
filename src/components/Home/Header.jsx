@@ -8,6 +8,7 @@ import {
   getIsLoading,
   getKeyword,
   getSearchFilter,
+  setEmptyFormAdvanced,
   setIsLoading,
   setKeyword,
   setSearch,
@@ -91,6 +92,7 @@ function Header() {
                   type: 'asc',
                 })
               )
+              dispatch(setEmptyFormAdvanced())
               navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
             } else {
               setMessage('Kolom pencarian tidak boleh kosong')

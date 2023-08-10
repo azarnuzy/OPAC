@@ -80,7 +80,7 @@ export const fetchSearchAdvanced = createAsyncThunk(
         subject,
         publisher = '',
         year = '',
-        sort = 'title',
+        sort = 'bibid',
         type = 'asc',
         limit = 10,
       } = formAdvanced
