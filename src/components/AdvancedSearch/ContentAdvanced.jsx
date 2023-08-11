@@ -1,14 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
   fetchSearchAdvanced,
   getIsFirstFetch,
-  getLimit,
-  getPage,
   getSearchData,
-  getSort,
   getTotalPage,
-  getType,
   setPagination,
 } from '../../features/search/searchSlice'
 import { useEffect, useMemo } from 'react'
@@ -25,6 +21,12 @@ function ContentAdvancedSearch() {
   const subject = searchParams.get('subject')
   const publisher = searchParams.get('publisher')
   const year = searchParams.get('year')
+  const page = searchParams.get('page')
+  const limit = searchParams.get('limit')
+  const sort = searchParams.get('sort')
+  const type = searchParams.get('type')
+
+  const navigate = useNavigate()
 
   const formAdvanced = useMemo(
     () => ({
@@ -41,11 +43,7 @@ function ContentAdvancedSearch() {
 
   const isFirstFetch = useSelector(getIsFirstFetch)
   const data = useSelector(getSearchData)
-  const page = useSelector(getPage)
   const totalPage = useSelector(getTotalPage)
-  const limit = useSelector(getLimit)
-  const sort = useSelector(getSort)
-  const type = useSelector(getType)
 
   let displayData = []
   if (data) {
@@ -57,6 +55,16 @@ function ContentAdvancedSearch() {
     dispatch(
       setPagination({ page: page, limit: limit, sort: sort, type: type })
     )
+    const searchParams = new URLSearchParams({
+      ...formAdvanced,
+      page,
+      sort: sort,
+      type: type,
+    })
+    navigate({
+      pathname: '/advanced-search',
+      search: searchParams.toString(),
+    })
     dispatch(
       fetchSearchAdvanced({
         formAdvanced: {
@@ -77,14 +85,14 @@ function ContentAdvancedSearch() {
         fetchSearchAdvanced({
           formAdvanced: {
             ...formAdvanced,
-            page: 1,
+            page: page,
             sort: sort,
             type: type,
           },
         })
       )
     }
-  }, [dispatch, formAdvanced, isFirstFetch, sort, type])
+  }, [dispatch, formAdvanced, isFirstFetch, sort, type, page])
 
   return (
     <div className='bg-light-gray-2 w-full min-h-[calc(100vh-496px)]'>

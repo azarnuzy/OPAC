@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchSearch,
   getLimit,
-  getPage,
   setSort,
   setType,
 } from '../../features/search/searchSlice'

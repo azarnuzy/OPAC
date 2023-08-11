@@ -7,11 +7,14 @@ import {
   setSort,
   setType,
 } from '../../features/search/searchSlice'
-import { translateSort, translateType } from '../../helpers/translateData'
-import { useSearchParams } from 'react-router-dom'
+import {
+  translateFilterSort,
+  translateSort,
+  translateType,
+} from '../../helpers/translateData'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 function SelectOption6({ filters, width = 'min-w-[300px]' }) {
-  const [selected, setSelected] = useState(filters[0])
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
   const material = searchParams.get('material')
@@ -21,7 +24,12 @@ function SelectOption6({ filters, width = 'min-w-[300px]' }) {
   const subject = searchParams.get('subject')
   const publisher = searchParams.get('publisher')
   const year = searchParams.get('year')
+  const type = searchParams.get('type')
+  const sort = searchParams.get('sort')
+  const limit = searchParams.get('limit')
 
+  const navigate = useNavigate()
+  const [selected, setSelected] = useState(translateFilterSort(type, sort))
   const formAdvanced = useMemo(
     () => ({
       material,
@@ -42,6 +50,13 @@ function SelectOption6({ filters, width = 'min-w-[300px]' }) {
         setSelected(select)
         dispatch(setSort(translateSort(select.name)))
         dispatch(setType(translateType(select.name)))
+        const searchParams = new URLSearchParams({
+          ...formAdvanced,
+          sort: translateSort(select.name),
+          type: translateType(select.name),
+          page: 1,
+          limit: limit,
+        })
         dispatch(
           fetchSearchAdvanced({
             formAdvanced: {
@@ -51,6 +66,10 @@ function SelectOption6({ filters, width = 'min-w-[300px]' }) {
             },
           })
         )
+        navigate({
+          pathname: '/advanced-search',
+          search: searchParams.toString(),
+        })
       }}
     >
       <div className={`relative ${width}`}>
