@@ -77,7 +77,7 @@ function Header() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className='flex flex-col sm:flex-row md:max-w-[600px]  bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'
+        className='flex sm:flex-row md:max-w-[600px] items-center bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'
       >
         {/* <SelectOption
           filters={filters}
@@ -102,7 +102,7 @@ function Header() {
           />
         </div>
         <button
-          className='bg-white rounded-3xl px-4 text-dark-blue text-sm font-semibold w-fit flex justify-end items-center text-center'
+          className='bg-white rounded-3xl px-4 text-dark-blue text-sm font-semibold w-fit py-1 flex  items-center text-center'
           type='submit'
         >
           Search
