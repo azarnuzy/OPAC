@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import SelectOption2 from '../Form/SelectOption2'
 import Modal from './Dialog'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAlert } from '../context/alert-context'
@@ -16,8 +15,6 @@ import {
 import Alert from './Alert'
 import Loading from './Loading'
 
-const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
-
 function Navbar() {
   let [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
@@ -33,7 +30,7 @@ function Navbar() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setSearch('Judul'))
+    dispatch(setSearch(''))
     dispatch(setKeyword(''))
   }, [dispatch])
 
@@ -63,55 +60,57 @@ function Navbar() {
   }
 
   return (
-    <div className='flex flex-col lg:flex-row items-center sm:justify-between w-full mx-auto max-w-7xl lg:px-3 sm:px-5 py-2'>
+    <>
+      <div className='flex flex-col lg:flex-row items-center sm:justify-between w-full mx-auto max-w-7xl lg:px-3 sm:px-5 py-2'>
+        <Link to={'/'}>
+          <img
+            src='/logo2.svg'
+            alt='logo'
+            className='w-[200px] sm:w-[300px]'
+          />
+        </Link>
+        <form
+          onSubmit={handleSubmit}
+          className='flex flex-wrap lg:flex-nowrap justify-center lg:justify-normal gap-2 items-center'
+        >
+          {/* <SelectOption2
+          filters={filters}
+          width='w-[300px]  lg:min-w-[150px] '
+        /> */}
+          <input
+            type='text'
+            placeholder='Ketik disini'
+            className='w-[350px] text-light-gray-3 bg-slate-200  focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
+            value={keyword}
+            onChange={(e) => dispatch(setKeyword(e.target.value))}
+          />
+          <button
+            className='flex items-center pl-2 pr-4 lg:p-0 gap-2 bg-light-gray rounded-full'
+            type='submit'
+          >
+            <img
+              src='/search2.svg'
+              alt='search'
+              width={38}
+              className='p-2'
+            />
+            <p className='lg:hidden text-light-gray-3 font-semibold'>Search</p>
+          </button>
+          <div className=' w-[1px] bg-gray-400 h-[40px] sm:flex items-center mx-2'></div>
+          <button
+            type='button'
+            onClick={openModal}
+            className=' text-light-gray-3 bg-slate-200 py-2 rounded-lg w-auto text-[14px] px-3 font-bold'
+          >
+            Advanced Search
+          </button>
+        </form>
+      </div>
+      {/* Alert */}
       <Alert
         message={message}
         status={status}
       />
-      <Link to={'/'}>
-        <img
-          src='/logo2.svg'
-          alt='logo'
-          className='w-[200px] sm:w-[300px]'
-        />
-      </Link>
-      <form
-        onSubmit={handleSubmit}
-        className='flex flex-wrap lg:flex-nowrap justify-center lg:justify-normal gap-2 items-center'
-      >
-        <SelectOption2
-          filters={filters}
-          width='w-[300px]  lg:min-w-[150px] '
-        />
-        <input
-          type='text'
-          placeholder='Ketik disini'
-          className='w-[300px] text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
-          value={keyword}
-          onChange={(e) => dispatch(setKeyword(e.target.value))}
-        />
-        <button
-          className='flex items-center pl-2 pr-4 lg:p-0 gap-2 bg-light-gray rounded-full'
-          type='submit'
-        >
-          <img
-            src='/search2.svg'
-            alt='search'
-            width={38}
-            className='p-2'
-          />
-          <p className='lg:hidden text-light-gray-3 font-semibold'>Search</p>
-        </button>
-        <div className=' w-[1px] bg-gray-400 h-[40px] sm:flex items-center mx-2'></div>
-        <button
-          type='button'
-          onClick={openModal}
-          className=' text-light-gray-3 bg-slate-200 py-2 rounded-lg w-auto text-[14px] px-3 font-bold'
-        >
-          Advanced Search
-        </button>
-      </form>
-
       {/* Modal */}
       <Modal
         isOpen={isOpen}
@@ -122,7 +121,7 @@ function Navbar() {
         isLoading={isLoading}
         setIsLoading={dispatch(setIsLoading)}
       />
-    </div>
+    </>
   )
 }
 
