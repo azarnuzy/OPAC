@@ -1,15 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
   fetchSearch,
   getIsFirstFetch,
-  getLimit,
-  getPage,
   getSearchData,
-  getSearchFilter,
-  getSort,
   getTotalPage,
-  getType,
   setPagination,
 } from '../../features/search/searchSlice'
 import { useEffect } from 'react'
@@ -20,16 +15,17 @@ import { translateSearchData } from '../../helpers/translateData'
 function Content() {
   const [searchParams] = useSearchParams()
   const keyword = searchParams.get('keyword')
-  const search = searchParams.get('search')
+  const page = searchParams.get('page')
+  const limit = searchParams.get('limit')
+  const sort = searchParams.get('sort')
+  const type = searchParams.get('type')
 
   const isFirstFetch = useSelector(getIsFirstFetch)
   const data = useSelector(getSearchData)
-  const searchFilter = useSelector(getSearchFilter)
-  const page = useSelector(getPage)
+
   const totalPage = useSelector(getTotalPage)
-  const limit = useSelector(getLimit)
-  const sort = useSelector(getSort)
-  const type = useSelector(getType)
+
+  const navigate = useNavigate()
 
   let displayData = []
   if (data) {
@@ -41,25 +37,37 @@ function Content() {
     dispatch(
       setPagination({ page: page, limit: limit, sort: sort, type: type })
     )
+    const searchParams = new URLSearchParams({
+      keyword,
+      page: page,
+      limit: 10,
+      sort: sort,
+      type: type,
+    })
+    navigate({
+      pathname: '/search',
+      search: searchParams.toString(),
+    })
     dispatch(fetchSearch({ keyword, search: '', page, limit, sort, type }))
   }
 
   const dispatch = useDispatch()
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (!isFirstFetch) {
       dispatch(
         fetchSearch({
           keyword,
           search: '',
-          page: 1,
+          page: page,
           limit: 10,
-          sort: 'bibid',
-          type: 'asc',
+          sort: sort,
+          type: type,
         })
       )
     }
-  }, [dispatch, isFirstFetch, keyword, search, searchFilter])
+  }, [dispatch, isFirstFetch, keyword, page, sort, type])
 
   return (
     <div className='bg-light-gray-2 w-full min-h-[calc(100vh-496px)]'>
@@ -125,8 +133,8 @@ function Content() {
         </div>
         {data?.data?.length > 0 && (
           <Pagination
-            currentPage={page}
-            totalPages={totalPage}
+            currentPage={Number(page)}
+            totalPages={Number(totalPage)}
             onPageChange={handlePageChange}
           />
         )}

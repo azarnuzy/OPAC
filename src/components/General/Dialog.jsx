@@ -45,12 +45,12 @@ export default function Modal({ isOpen, setIsOpen }) {
   ])
   const [selectedMaterial, setSelectedMaterial] = useState({
     code: '',
-    description: 'Pilih salah satu',
+    description: 'Semua Material',
   })
 
   const [selectedCollection, setSelectedCollection] = useState({
     code: '',
-    description: 'Pilih salah satu',
+    description: 'Semua Koleksi',
   })
 
   const [publisher, setPublisher] = useState('')
@@ -128,9 +128,18 @@ export default function Modal({ isOpen, setIsOpen }) {
   const submitForm = async (e) => {
     e.preventDefault()
     await dispatch(fetchSearchAdvanced({ formAdvanced }))
+
+    const searchParams = {
+      ...formAdvanced,
+      page: 1,
+      limit: 10,
+      sort: 'bibid',
+      type: 'asc',
+    }
+
     navigate({
       pathname: '/advanced-search',
-      search: `?${new URLSearchParams(formAdvanced).toString()}`,
+      search: `?${new URLSearchParams(searchParams).toString()}`,
     })
   }
 

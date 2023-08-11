@@ -6,7 +6,6 @@ import {
   fetchSearch,
   getIsLoading,
   getKeyword,
-  getSearchFilter,
   setEmptyFormAdvanced,
   setIsLoading,
   setKeyword,
@@ -25,7 +24,6 @@ function Header() {
 
   const dispatch = useDispatch()
   const keyword = useSelector(getKeyword)
-  const searchFilter = useSelector(getSearchFilter)
   const isLoading = useSelector(getIsLoading)
 
   useEffect(() => {
@@ -53,7 +51,17 @@ function Header() {
         })
       )
       dispatch(setEmptyFormAdvanced())
-      navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
+      const searchParams = new URLSearchParams({
+        keyword,
+        page: 1,
+        limit: 10,
+        sort: 'bibid',
+        type: 'asc',
+      })
+      navigate({
+        pathname: '/search',
+        search: searchParams.toString(),
+      })
     } else {
       setMessage('Kolom pencarian tidak boleh kosong')
       setStatus('Peringatan')

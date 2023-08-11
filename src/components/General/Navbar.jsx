@@ -41,7 +41,6 @@ function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (keyword !== '') {
-      navigate(`/search?search=${searchFilter}&keyword=${keyword}`)
       dispatch(
         fetchSearch({
           keyword,
@@ -52,6 +51,17 @@ function Navbar() {
           type: 'asc',
         })
       )
+      const searchParams = new URLSearchParams({
+        keyword,
+        page: 1,
+        limit: 10,
+        sort: 'bibid',
+        type: 'asc',
+      })
+      navigate({
+        pathname: '/search',
+        search: searchParams.toString(),
+      })
     } else {
       setMessage('Kolom pencarian tidak boleh kosong')
       setStatus('Peringatan')

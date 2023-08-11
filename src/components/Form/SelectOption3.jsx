@@ -6,21 +6,25 @@ import {
   fetchSearch,
   getLimit,
   getPage,
-  getSearchFilter,
   setSort,
   setType,
 } from '../../features/search/searchSlice'
-import { translateSort, translateType } from '../../helpers/translateData'
-import { useSearchParams } from 'react-router-dom'
+import {
+  translateFilterSort,
+  translateSort,
+  translateType,
+} from '../../helpers/translateData'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 function SelectOption3({ filters, width = 'min-w-[300px]' }) {
-  const [selected, setSelected] = useState(filters[0])
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
+  const type = searchParams.get('type')
+  const sort = searchParams.get('sort')
+  const [selected, setSelected] = useState(translateFilterSort(type, sort))
   const keyword = searchParams.get('keyword')
-  const searchFilter = useSelector(getSearchFilter)
-  const page = useSelector(getPage)
   const limit = useSelector(getLimit)
+  const navigate = useNavigate()
 
   return (
     <Listbox
@@ -29,16 +33,27 @@ function SelectOption3({ filters, width = 'min-w-[300px]' }) {
         setSelected(select)
         dispatch(setSort(translateSort(select.name)))
         dispatch(setType(translateType(select.name)))
+        const searchParams = new URLSearchParams({
+          keyword,
+          page: 1,
+          limit,
+          sort: translateSort(select.name),
+          type: translateType(select.name),
+        })
         dispatch(
           fetchSearch({
             keyword,
-            search: searchFilter,
-            page,
+            search: '',
+            page: 1,
             limit,
             sort: translateSort(select.name),
             type: translateType(select.name),
           })
         )
+        navigate({
+          pathname: '/search',
+          search: searchParams.toString(),
+        })
       }}
     >
       <div className={`relative ${width}`}>

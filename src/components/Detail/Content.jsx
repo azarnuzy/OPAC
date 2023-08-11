@@ -79,7 +79,10 @@ function Content() {
             <tbody className='grid gap-2 grid-cols-1 '>
               {Object.entries(dataFilter)?.map(([key, value]) => {
                 return (
-                  <tr key={key}>
+                  <tr
+                    className='flex items-start'
+                    key={key}
+                  >
                     <td className='pr-4 items-start text-light-gray-3 font-bold grid-cols-2 md:w-52 '>
                       {translateDetailBiblio(key)}
                     </td>

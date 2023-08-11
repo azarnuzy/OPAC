@@ -110,3 +110,13 @@ export const translateDetailBiblio = (name) => {
       return ''
   }
 }
+
+export const translateFilterSort = (type, sort) => {
+  if (type === 'asc' && sort === 'bibid') {
+    return { name: 'Paling Relevan' }
+  } else if (type === 'asc' && sort === 'date') {
+    return { name: 'Dari yang Terbaru' }
+  } else if (type === 'desc' && sort === 'date') {
+    return { name: 'Dari yang Terlama' }
+  }
+}

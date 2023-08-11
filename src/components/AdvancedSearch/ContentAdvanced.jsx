@@ -59,7 +59,12 @@ function ContentAdvancedSearch() {
     )
     dispatch(
       fetchSearchAdvanced({
-        formAdvanced,
+        formAdvanced: {
+          ...formAdvanced,
+          page,
+          sort: sort,
+          type: type,
+        },
       })
     )
   }
@@ -70,11 +75,16 @@ function ContentAdvancedSearch() {
     if (!isFirstFetch) {
       dispatch(
         fetchSearchAdvanced({
-          formAdvanced,
+          formAdvanced: {
+            ...formAdvanced,
+            page: 1,
+            sort: sort,
+            type: type,
+          },
         })
       )
     }
-  }, [dispatch, formAdvanced, isFirstFetch])
+  }, [dispatch, formAdvanced, isFirstFetch, sort, type])
 
   return (
     <div className='bg-light-gray-2 w-full min-h-[calc(100vh-496px)]'>
@@ -145,8 +155,8 @@ function ContentAdvancedSearch() {
         </div>
         {data?.data?.length > 0 && (
           <Pagination
-            currentPage={page}
-            totalPages={totalPage}
+            currentPage={Number(page)}
+            totalPages={Number(totalPage)}
             onPageChange={handlePageChange}
           />
         )}

@@ -83,6 +83,7 @@ export const fetchSearchAdvanced = createAsyncThunk(
         sort = 'bibid',
         type = 'asc',
         limit = 10,
+        page = 1,
       } = formAdvanced
       const params = {
         material: material,
@@ -95,6 +96,7 @@ export const fetchSearchAdvanced = createAsyncThunk(
         limit: limit,
         publisher: publisher,
         year: year,
+        page: page,
       }
       const response = await axios.get(
         `${apiConfig.baseUrl}/v1/biblios/advanced-search`,
@@ -165,10 +167,22 @@ const searchSlice = createSlice({
         state.isLoading = false
       }),
       builder.addCase(fetchCollections.fulfilled, (state, action) => {
-        state.collections = action.payload
+        state.collections = {
+          ...action.payload,
+          data: [
+            { code: '', description: 'Semua Koleksi' },
+            ...action.payload.data,
+          ],
+        }
       }),
       builder.addCase(fetchMaterials.fulfilled, (state, action) => {
-        state.materials = action.payload
+        state.materials = {
+          ...action.payload,
+          data: [
+            { code: '', description: 'Semua Material' },
+            ...action.payload.data,
+          ],
+        }
       }),
       builder.addCase(fetchSearchAdvanced.pending, (state) => {
         state.isLoading = true

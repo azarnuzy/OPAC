@@ -9,6 +9,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   const handleNextClick = () => {
     if (currentPage < totalPages) {
+      console.log(currentPage + 1)
       onPageChange(currentPage + 1)
     }
   }
