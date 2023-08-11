@@ -4,8 +4,8 @@ import apiConfig from '../../api/apiConfig'
 import { translateFilters } from '../../helpers/translateData'
 
 const initialState = {
-  search: 'Judul',
-  searchFilter: 'title',
+  search: '',
+  searchFilter: '',
   keyword: '',
   data: [],
   isFirstFetch: false,

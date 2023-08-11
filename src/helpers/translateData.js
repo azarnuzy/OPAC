@@ -34,7 +34,7 @@ export const translateFilters = (filter) => {
     case 'Kategori':
       return 'category'
     default:
-      return 'title'
+      return ''
   }
 }
 

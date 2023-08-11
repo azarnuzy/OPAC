@@ -41,9 +41,7 @@ function Content() {
     dispatch(
       setPagination({ page: page, limit: limit, sort: sort, type: type })
     )
-    dispatch(
-      fetchSearch({ keyword, search: searchFilter, page, limit, sort, type })
-    )
+    dispatch(fetchSearch({ keyword, search: '', page, limit, sort, type }))
   }
 
   const dispatch = useDispatch()
@@ -53,7 +51,7 @@ function Content() {
       dispatch(
         fetchSearch({
           keyword,
-          search: searchFilter,
+          search: '',
           page: 1,
           limit: 10,
           sort: 'bibid',

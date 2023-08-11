@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom'
-import SelectOption from '../Form/SelectOption'
 import { useEffect, useState } from 'react'
 import Modal from '../General/Dialog'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,8 +16,6 @@ import Alert from '../General/Alert'
 import { useAlert } from '../context/alert-context'
 import Loading from '../General/Loading'
 
-const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
-
 function Header() {
   let [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
@@ -32,7 +29,7 @@ function Header() {
   const isLoading = useSelector(getIsLoading)
 
   useEffect(() => {
-    dispatch(setSearch('Judul'))
+    dispatch(setSearch(''))
     dispatch(setKeyword(''))
   }, [dispatch])
 
@@ -48,7 +45,7 @@ function Header() {
       dispatch(
         fetchSearch({
           keyword,
-          search: searchFilter,
+          search: '',
           page: 1,
           limit: 10,
           sort: 'bibid',
@@ -80,32 +77,32 @@ function Header() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className='flex flex-col sm:flex-row md:max-w-[912px] md:w-fit bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'
+        className='flex flex-col sm:flex-row md:max-w-[600px]  bg-search-home px-4 gap-2 relative z-10 sm:py-2 py-3 w-[calc(100%-20px)]'
       >
-        <SelectOption
+        {/* <SelectOption
           filters={filters}
           width={'min-w-[120px]'}
           color={'text-white'}
-        />
-        <div className='flex gap-1 w-full pl-2 md:w-[350px] items-center'>
+        /> */}
+        <div className='flex gap-1 w-full pl-2 items-center'>
           <label htmlFor='search-input'>
             <img
               src='/search.svg'
               alt='search'
-              width={16}
-              className='opacity-90'
+              width={20}
+              className=''
             />
           </label>
           <input
             id='search-input'
             value={keyword}
             placeholder='Ketik disini'
-            className='w-full text-white bg-transparent text-sm focus:outline-none placeholder-white opacity-90 py-1'
+            className='w-full text-white bg-transparent text-lg focus:outline-none placeholder-white  py-1'
             onChange={(e) => dispatch(setKeyword(e.target.value))}
           />
         </div>
         <button
-          className='bg-white rounded-2xl px-4 text-dark-blue text-sm font-semibold sm:w-min w-[150px] py-1 mx-auto text-center'
+          className='bg-white rounded-3xl px-4 text-dark-blue text-sm font-semibold w-fit flex justify-end items-center text-center'
           type='submit'
         >
           Search
