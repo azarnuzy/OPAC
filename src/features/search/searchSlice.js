@@ -218,7 +218,7 @@ const searchSlice = createSlice({
           data: [{ code: '', description: 'Semua Penerbit' }, ...publishers],
         }
 
-        console.log(state.publishers)
+        // console.log(state.publishers)
       })
   },
 })
