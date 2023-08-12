@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import {
   fetchPublisher,
   getPublishers,
+  setFormAdvanced,
 } from '../../features/search/searchSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import useDebounce from '../General/UseDebounce'
 
 export default function ComboboxFilter({ selected, setSelected }) {
-  //   const [selected, setSelected] = useState(people[0])
   const dispatch = useDispatch()
 
   const people = useSelector(getPublishers).data
@@ -43,7 +43,10 @@ export default function ComboboxFilter({ selected, setSelected }) {
     <div className=''>
       <Combobox
         value={selected}
-        onChange={setSelected}
+        onChange={(select) => {
+          dispatch(setFormAdvanced({ name: 'publisher', code: select.code }))
+          setSelected(select)
+        }}
       >
         <div className='relative'>
           <div className=''>
