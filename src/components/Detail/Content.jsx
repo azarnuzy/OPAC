@@ -17,7 +17,7 @@ function Content() {
   const dispatch = useDispatch()
 
   const data = useSelector(getData)
-  const dataFilter = useSelector(getDataFilter)
+  let dataFilter = useSelector(getDataFilter)
   const isLoading = useSelector(getIsLoading)
   // const isFirstFetch = useSelector(getIsFirstFetch)
 
@@ -136,7 +136,7 @@ function Content() {
             Rekomendasi
           </h2>
           <ul className='space-y-2'>
-            {data?.data?.recommendation?.slice(0, showCount).map((title) => (
+            {data?.data?.recommendation?.slice(1, showCount).map((title) => (
               <li key={title.bibid}>
                 <Link
                   to={`/detail/${title.bibid}`}
