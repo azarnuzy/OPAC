@@ -12,10 +12,11 @@ import {
   setEmptyFormAdvanced,
   setFormAdvanced,
 } from '../../features/search/searchSlice'
-import SelectOption4 from '../Form/SelectOption4'
 import SelectOption5 from '../Form/SelectOption5'
 import { formAdvancedFilter } from '../../helpers/filterData'
 import { useNavigate } from 'react-router-dom'
+import ComboboxFilter from '../Form/ComboboxFilter'
+import SelectOption4 from '../Form/SelectOption4'
 
 const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
 
@@ -28,11 +29,15 @@ export default function Modal({ isOpen, setIsOpen }) {
   useEffect(() => {
     dispatch(fetchCollections())
     dispatch(fetchMaterials())
+    // dispatch(fetchPublisher())
   }, [dispatch])
 
   const collections = useSelector(getCollections)
   const materials = useSelector(getMaterials)
+  // const publishers = useSelector(getPublishers)
   const formAdvanced = useSelector(getFormAdvanced)
+
+  // console.log(publishers)
 
   const navigate = useNavigate()
 
@@ -53,7 +58,12 @@ export default function Modal({ isOpen, setIsOpen }) {
     description: 'Semua Koleksi',
   })
 
-  const [publisher, setPublisher] = useState('')
+  const [publisher, setPublisher] = useState({
+    code: '',
+    description: 'Semua Penerbit',
+  })
+
+  // const [publisher, setPublisher] = useState('')
   const [inputYear, setInputYear] = useState(true)
   const [year, setYear] = useState({
     from: '',
@@ -225,7 +235,12 @@ export default function Modal({ isOpen, setIsOpen }) {
                       >
                         Penerbit
                       </label>
-                      <input
+                      <ComboboxFilter
+                        // people={publishers.data}
+                        selected={publisher}
+                        setSelected={setPublisher}
+                      />
+                      {/* <input
                         name='publisher'
                         id='publisher'
                         placeholder='Ketik disini'
@@ -240,7 +255,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                             })
                           )
                         }}
-                      />
+                      /> */}
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label

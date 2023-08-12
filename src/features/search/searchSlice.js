@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import apiConfig from '../../api/apiConfig'
 import { translateFilters } from '../../helpers/translateData'
+import { filterPublishers } from '../../helpers/filterData'
 
 const initialState = {
   search: '',
@@ -12,6 +13,7 @@ const initialState = {
   isFirstFetchAdvanced: false,
   collections: [],
   materials: [],
+  publishers: [],
   page: 1,
   totalPage: 1,
   totalData: 0,
@@ -61,6 +63,20 @@ export const fetchMaterials = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(`${apiConfig.baseUrl}/v1/materials`)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+)
+
+export const fetchPublisher = createAsyncThunk(
+  'search/fetchPublisher',
+  async (key) => {
+    try {
+      const response = await axios.get(
+        `${apiConfig.baseUrl}/v1/details/publishers?key=${key}`
+      )
       return response.data
     } catch (error) {
       console.error(error)
@@ -194,6 +210,15 @@ const searchSlice = createSlice({
         state.page = action.payload.pagination.currentPage
         state.totalPage = action.payload.pagination.totalPages
         state.isLoading = false
+      }),
+      builder.addCase(fetchPublisher.fulfilled, (state, action) => {
+        const publishers = filterPublishers(action.payload.data)
+        state.publishers = {
+          ...action.payload,
+          data: [{ code: '', description: 'Semua Penerbit' }, ...publishers],
+        }
+
+        console.log(state.publishers)
       })
   },
 })
@@ -215,6 +240,7 @@ export const getSort = (state) => state.search.sort
 export const getType = (state) => state.search.type
 export const getIsLoading = (state) => state.search.isLoading
 export const getFormAdvanced = (state) => state.search.formAdvanced
+export const getPublishers = (state) => state.search.publishers
 
 export const {
   setSearch,

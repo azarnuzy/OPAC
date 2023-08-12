@@ -72,7 +72,7 @@ export const formatDateIndonesia = (dateString) => {
 
 export const formAdvancedFilter = (dataArray) => {
   const formAdvanced = { title: '', author: '', subject: '' }
-  console.log(dataArray)
+
   dataArray.forEach((item) => {
     const { keyword, search } = item
     if (search === 'Judul') {
@@ -90,4 +90,15 @@ export const formAdvancedFilter = (dataArray) => {
   formAdvanced.subject = formAdvanced.subject.slice(0, -1)
 
   return formAdvanced
+}
+
+export const filterPublishers = (data) => {
+  // const shuffledData = data.sort(() => 0.5 - Math.random())
+  const selectedPublishers = data.slice(0, 30).map((item) => {
+    return {
+      code: item.publisher,
+      description: item.publisher,
+    }
+  })
+  return selectedPublishers
 }
