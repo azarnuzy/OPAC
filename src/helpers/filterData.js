@@ -71,7 +71,7 @@ export const formatDateIndonesia = (dateString) => {
 }
 
 export const formAdvancedFilter = (dataArray) => {
-  const formAdvanced = { title: '', author: '', subject: '' }
+  const formAdvanced = { title: '', author: '', subject: '', all: '' }
 
   dataArray.forEach((item) => {
     const { keyword, search } = item

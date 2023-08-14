@@ -121,13 +121,16 @@ export default function Modal({ isOpen, setIsOpen }) {
     setInputForm([{ keyword: '', search: '', filters: filters }])
     setSelectedMaterial({
       code: '',
-      description: 'Pilih salah satu',
+      description: 'Semua Material',
     })
     setSelectedCollection({
       code: '',
-      description: 'Pilih salah satu',
+      description: 'Semua Koleksi',
     })
-    setPublisher('')
+    setPublisher({
+      code: '',
+      description: 'Semua Penerbit',
+    })
     setYear({
       from: '',
       to: '',
@@ -296,7 +299,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                             type='number'
                             min={1900}
                             max={2100}
-                            placeholder='Tahun '
+                            placeholder='Semua Tahun '
                             className='w-full  text-light-gray-3 bg-slate-200 text-sm focus:outline-none placeholder-light-gray-3 opacity-70 py-2 px-3 rounded-lg'
                             value={year.year}
                             onChange={(e) => {
