@@ -54,9 +54,9 @@ export const translateType = (name) => {
     case 'Paling Relevan':
       return 'asc'
     case 'Dari yang Terbaru':
-      return 'asc'
-    case 'Dari yang Terlama':
       return 'desc'
+    case 'Dari yang Terlama':
+      return 'asc'
   }
 }
 
