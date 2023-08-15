@@ -18,7 +18,12 @@ import { useNavigate } from 'react-router-dom'
 import ComboboxFilter from '../Form/ComboboxFilter'
 import SelectOption4 from '../Form/SelectOption4'
 
-const filters = [{ name: 'Judul' }, { name: 'Pengarang' }, { name: 'Subjek' }]
+const filters = [
+  { name: 'Semua' },
+  { name: 'Judul' },
+  { name: 'Pengarang' },
+  { name: 'Subjek' },
+]
 
 export default function Modal({ isOpen, setIsOpen }) {
   const dispatch = useDispatch()
@@ -72,6 +77,7 @@ export default function Modal({ isOpen, setIsOpen }) {
   })
 
   const setAdvancedFrom = (formInput) => {
+    console.log(formInput)
     dispatch(
       setFormAdvanced({
         name: 'title',
@@ -88,6 +94,12 @@ export default function Modal({ isOpen, setIsOpen }) {
       setFormAdvanced({
         name: 'subject',
         code: formInput.subject,
+      })
+    )
+    dispatch(
+      setFormAdvanced({
+        name: 'all',
+        code: formInput.all,
       })
     )
   }

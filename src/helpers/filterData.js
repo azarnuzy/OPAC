@@ -81,6 +81,8 @@ export const formAdvancedFilter = (dataArray) => {
       formAdvanced.author += keyword + ','
     } else if (search === 'Subjek') {
       formAdvanced.subject += keyword + ','
+    } else if (search === 'Semua' || search === '') {
+      formAdvanced.all += keyword + ','
     }
   })
 
@@ -88,6 +90,7 @@ export const formAdvancedFilter = (dataArray) => {
   formAdvanced.title = formAdvanced.title.slice(0, -1)
   formAdvanced.author = formAdvanced.author.slice(0, -1)
   formAdvanced.subject = formAdvanced.subject.slice(0, -1)
+  formAdvanced.all = formAdvanced.all.slice(0, -1)
 
   return formAdvanced
 }

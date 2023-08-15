@@ -10,7 +10,7 @@ function SelectOption5({
   width = 'min-w-[300px]',
   search,
 }) {
-  const [, setSelected] = useState({ name: 'Pilih Salah Satu' })
+  const [, setSelected] = useState({ name: 'Semua' })
   return (
     <Listbox
       value={search}
@@ -26,7 +26,7 @@ function SelectOption5({
           <span className='block truncate text-clip'>
             {filters[index]['search'].length > 0
               ? filters[index]['search']
-              : search || 'Pilih Salah Satu'}
+              : search || 'Pilih Semua'}
           </span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
             <img

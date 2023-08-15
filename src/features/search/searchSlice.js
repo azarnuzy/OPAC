@@ -24,6 +24,7 @@ const initialState = {
   formAdvanced: {
     material: '',
     collection: '',
+    all: '',
     title: '',
     author: '',
     subject: '',
@@ -100,6 +101,7 @@ export const fetchSearchAdvanced = createAsyncThunk(
         type = 'asc',
         limit = 10,
         page = 1,
+        all,
       } = formAdvanced
       const params = {
         material: material,
@@ -113,6 +115,7 @@ export const fetchSearchAdvanced = createAsyncThunk(
         publisher: publisher,
         year: year,
         page: page,
+        all: all,
       }
       const response = await axios.get(
         `${apiConfig.baseUrl}/v1/biblios/advanced-search`,
