@@ -58,6 +58,7 @@ function ContentAdvancedSearch() {
     const searchParams = new URLSearchParams({
       ...formAdvanced,
       page,
+      limit: 10,
       sort: sort,
       type: type,
     })

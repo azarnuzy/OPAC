@@ -15,7 +15,7 @@ const filters = [
 
 function TopSearchResult() {
   const page = useSelector(getPage)
-  const limit = useSelector(getLimit)
+  const limit = Number(useSelector(getLimit))
   const totalData = useSelector(getTotalData)
 
   return (
