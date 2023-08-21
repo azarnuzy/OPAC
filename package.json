@@ -1,7 +1,7 @@
 {
   "name": "perpus-opac",
   "private": true,
-  "homepage": "https://perpustakaan.upi.edu",
+  "homepage": "https://perpustakaan.upi.edu/opacnew/opac",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
