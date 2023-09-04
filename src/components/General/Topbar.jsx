@@ -5,14 +5,14 @@ function Topbar() {
         <div className='flex gap-8 text-[12px] items-center'>
           <div className='flex gap-2 items-center'>
             <img
-              src='/call.svg'
+              src='/opacnew/opac/call.svg'
               alt='phone'
             />
             <p>0859-5999-9300</p>
           </div>
           <div className='flex gap-2 items-center'>
             <img
-              src='/Mail.svg'
+              src='/opacnew/opac/Mail.svg'
               alt='mail'
             />
             <p>perpustakaan@upi.edu</p>
@@ -23,19 +23,19 @@ function Topbar() {
           <div className='w-[1px] h-[14px] bg-white'></div>
           <div className='flex gap-1'>
             <img
-              src='/Facebook.svg'
+              src='/opacnew/opac/Facebook.svg'
               alt='Facebook'
             />
             <img
-              src='/Twitter.svg'
+              src='/opacnew/opac/Twitter.svg'
               alt='Twitter'
             />
             <img
-              src='/Linkedin.svg'
+              src='/opacnew/opac/Linkedin.svg'
               alt='Linkedin'
             />
             <img
-              src='/Youtube.svg'
+              src='/opacnew/opac/Youtube.svg'
               alt='Youtube'
             />
           </div>

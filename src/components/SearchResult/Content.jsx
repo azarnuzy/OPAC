@@ -82,7 +82,7 @@ function Content() {
               >
                 <div className='p-3 flex flex-col sm:flex-row items-center gap-5'>
                   <img
-                    src='/assets/book.png'
+                    src='/opacnew/opac/assets/book.png'
                     alt='book-cover'
                     width={150}
                     height={200}
@@ -121,7 +121,7 @@ function Content() {
           ) : (
             <div className='h-full flex flex-col md:py-10 items-center justify-center'>
               <img
-                src='/noData.svg'
+                src='/opacnew/opac/noData.svg'
                 alt='no-data'
                 width={300}
               />

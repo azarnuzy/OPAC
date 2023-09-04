@@ -296,7 +296,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                           }}
                         >
                           <img
-                            src='/change.svg'
+                            src='/opacnew/opac/change.svg'
                             alt='change'
                             width={20}
                             height={20}
@@ -411,7 +411,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                             }}
                           >
                             <img
-                              src='/minus.svg'
+                              src='/opacnew/opac/minus.svg'
                               alt='minus'
                             />
                           </button>
@@ -422,7 +422,7 @@ export default function Modal({ isOpen, setIsOpen }) {
                             onClick={handleAddFormComponent}
                           >
                             <img
-                              src='/plus.svg'
+                              src='/opacnew/opac/plus.svg'
                               alt='plus'
                             />
                           </button>

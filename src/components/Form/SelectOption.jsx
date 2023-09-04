@@ -23,7 +23,7 @@ function SelectOption({ filters, width, color }) {
           <span className='block truncate '>{selected.name}</span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
             <img
-              src='/chevron-up-down.svg'
+              src='/opacnew/opac/chevron-up-down.svg'
               alt='chevron_up_down'
               className={`h-5 w-5 ${color}`}
               aria-hidden='true'

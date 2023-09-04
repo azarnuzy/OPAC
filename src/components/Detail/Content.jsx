@@ -43,7 +43,7 @@ function Content() {
       <div className='flex gap-3 flex-col md:flex-row md:flex-wrap lg:flex-nowrap md:justify-end lg:justify-normal max-w-7xl mx-auto px-4'>
         <div className='w-full md:w-fit flex flex-col justify-center items-center md:justify-normal'>
           <img
-            src='/assets/book.png'
+            src='/opacnew/opac/assets/book.png'
             alt='book'
             width={250}
             className='w-[250px] h-[330px]  rounded-md shadow-md'
@@ -52,7 +52,7 @@ function Content() {
         <div className='flex w-full h-fit bg-white shadow-md border border-slate-200 rounded-lg p-3 flex-col gap-1 items-start md:w-[calc(100%-265px)] lg:w-[calc(100%-500px)]'>
           <div className='flex gap-2'>
             <img
-              src='/bookmark.svg'
+              src='/opacnew/opac/bookmark.svg'
               alt='bookmark'
               width={20}
             />

@@ -5,20 +5,20 @@ function Footer() {
     <div className='bg-dark-gray relative overflow-hidden'>
       <div className='absolute -top-10 -left-5 overflow-hidden'>
         <img
-          src='/ornament1.svg'
+          src='/opacnew/opac/ornament1.svg'
           alt='ornament'
         />
       </div>
       <div className='absolute -bottom-10 right-0 overflow-hidden'>
         <img
-          src='/ornament1.svg'
+          src='/opacnew/opac/ornament1.svg'
           alt='ornament'
         />
       </div>
       <div className='w-full mx-auto max-w-7xl flex flex-col gap-8 sm:gap-0 sm:flex-row items-start sm:items-center justify-between text-white relative px-3 py-4'>
         <div className='flex flex-col gap-8 max-w-[360px]'>
           <img
-            src='/logo1.svg'
+            src='/opacnew/opac/logo1.svg'
             alt='logo'
             className='w-[300px]'
           />
@@ -26,28 +26,28 @@ function Footer() {
           <div className='flex justify-between items-center'>
             <Link>
               <img
-                src='/facebook-circle.svg'
+                src='/opacnew/opac/facebook-circle.svg'
                 alt='facebook'
                 width={30}
               />
             </Link>
             <Link>
               <img
-                src='/linkedin-circle.svg'
+                src='/opacnew/opac/linkedin-circle.svg'
                 alt='linkedin'
                 width={30}
               />
             </Link>
             <Link>
               <img
-                src='/Twitter.svg'
+                src='/opacnew/opac/Twitter.svg'
                 alt='twitter'
                 width={30}
               />
             </Link>
             <Link>
               <img
-                src='/youtube-circle.svg'
+                src='/opacnew/opac/youtube-circle.svg'
                 alt='youtube'
                 width={30}
               />

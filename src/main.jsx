@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <AlertProvider>
         <HelmetProvider>
-          <BrowserRouter>
+          <BrowserRouter basename='/opacnew/opac'>
             <App />
           </BrowserRouter>
         </HelmetProvider>

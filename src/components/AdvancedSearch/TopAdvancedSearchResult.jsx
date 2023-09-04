@@ -38,7 +38,7 @@ function TopAdvancedSearchResult() {
             Menampilkan Pencarian
           </p>
           <img
-            src='/arrow.svg'
+            src='/opacnew/opac/arrow.svg'
             alt='arrow'
             width={30}
             className='hidden sm:block'
