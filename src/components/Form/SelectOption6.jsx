@@ -77,7 +77,7 @@ function SelectOption6({ filters, width = 'min-w-[300px]' }) {
           className={`flex py-1 px-3 bg-light-gray-2 gap-2 rounded-full items-center`}
         >
           <img
-            src='/opacnew/opac/filter.svg'
+            src='/filter.svg'
             alt='filter'
             width={27}
           />

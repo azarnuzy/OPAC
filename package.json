@@ -1,7 +1,7 @@
 {
   "name": "perpus-opac",
   "private": true,
-  "homepage": "/opacnew/opac",
+  "homepage": "/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

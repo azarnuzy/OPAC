@@ -74,7 +74,7 @@ function Navbar() {
       <div className='flex flex-col lg:flex-row items-center sm:justify-between w-full mx-auto max-w-7xl lg:px-3 sm:px-5 py-2'>
         <Link to={'/'}>
           <img
-            src='/opacnew/opac/logo2.svg'
+            src='/logo2.svg'
             alt='logo'
             className='w-[200px] sm:w-[300px]'
           />
@@ -99,7 +99,7 @@ function Navbar() {
             type='submit'
           >
             <img
-              src='/opacnew/opac/search2.svg'
+              src='/search2.svg'
               alt='search'
               width={38}
               className='p-2'

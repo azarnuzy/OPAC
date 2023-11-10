@@ -108,7 +108,7 @@ function ContentAdvancedSearch() {
               >
                 <div className='p-3 flex flex-col sm:flex-row items-center gap-5'>
                   <img
-                    src='/opacnew/opac/assets/book.png'
+                    src='/assets/book.png'
                     alt='book-cover'
                     width={150}
                     height={200}
@@ -152,7 +152,7 @@ function ContentAdvancedSearch() {
           ) : (
             <div className='h-full flex flex-col md:py-10 items-center justify-center'>
               <img
-                src='/opacnew/opac/noData.svg'
+                src='/noData.svg'
                 alt='no-data'
                 width={300}
               />

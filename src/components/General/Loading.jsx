@@ -13,7 +13,7 @@ function Loading({ isLoading }) {
     >
       <div className='absolute top-5 right-5 z-50'>
         <img
-          src='/opacnew/opac/cross.svg'
+          src='/cross.svg'
           alt='cross'
           className='font-white w-10 h-10 cursor-pointer text-[30px] text-white'
           onClick={() => {

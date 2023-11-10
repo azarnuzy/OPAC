@@ -59,7 +59,7 @@ export default function ComboboxFilter({ selected, setSelected }) {
             />
             <Combobox.Button className='absolute inset-y-0 right-0 flex items-center pr-2'>
               <img
-                src='/opacnew/opac/chevron-up-down2.svg'
+                src='/chevron-up-down2.svg'
                 alt='chevron_up_down'
                 width={20}
                 className=' text-gray-400'

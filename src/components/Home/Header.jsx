@@ -76,7 +76,7 @@ function Header() {
         status={status}
       />
       <img
-        src='/opacnew/opac/logo1.svg'
+        src='/logo1.svg'
         alt='logo'
         className='w-[300px] sm:w-min mb-10'
       />
@@ -95,7 +95,7 @@ function Header() {
         <div className='flex gap-1 w-full pl-2 items-center'>
           <label htmlFor='search-input'>
             <img
-              src='/opacnew/opac/search.svg'
+              src='/search.svg'
               alt='search'
               width={20}
               className=''
